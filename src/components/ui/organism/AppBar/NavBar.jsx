@@ -1,5 +1,5 @@
 import React from "react";
-import { AppBar, Button, CssBaseline, Toolbar } from "@mui/material";
+import { AppBar, Button, CssBaseline, Grid, Toolbar } from "@mui/material";
 import { NavLogo } from "../../atoms/NavLogo/NavLogo";
 import logo from "../../../../img/comercio-electronico.png";
 import { Box } from "@mui/system";
@@ -19,6 +19,10 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: theme.spacing(2),
     paddingRight: theme.spacing(2),
   },
+  ini: {
+    display: "flex",
+    alignItems: "center",
+  },
 }));
 
 export const NavBar = () => {
@@ -37,30 +41,42 @@ export const NavBar = () => {
 
       <AppBar position="static" className={classes.root} elevation={1}>
         <Toolbar disableGutters className={classes.toolbar}>
-          <NavLogo logo={logo} />
+          <Grid container>
+            <Grid item xs={2} className={classes.ini}>
+              <NavLogo logo={logo} />
+            </Grid>
 
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-            <MenuOption icon={<MenuIcon />} tooltip={"Items"} items={pages} />
-          </Box>
 
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
-              <Button key={page} onClick={handleItem} sx={{ color: "white" }}>
-                {page}
-              </Button>
-            ))}
-          </Box>
+            <Grid
+              item
+              xs={5}
+              sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}
+            >
+              <MenuOption icon={<MenuIcon />} tooltip={"Items"} items={pages} />
+            </Grid>
 
-          <Box sx={{ flexGrow: 0 }}>
-            <MenuOption
-              icon={<AccountCircleIcon />}
-              tooltip={"Items"}
-              items={settings}
-            />
-          </Box>
+            <Grid
+              item
+              xs={5}
+              sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}
+            >
+              {pages.map((page) => (
+                <Button key={page} onClick={handleItem} sx={{ color: "white" }}>
+                  {page}
+                </Button>
+              ))}
+            </Grid>
+
+            <Grid item xs={5} sx={{ flexGrow: 0,display: "flex" ,justifyContent: "flex-end", }}>
+              <MenuOption
+                icon={<AccountCircleIcon />}
+                tooltip={"Items"}
+                items={settings}
+              />
+            </Grid>
+          </Grid>
         </Toolbar>
       </AppBar>
-
     </>
   );
 };
