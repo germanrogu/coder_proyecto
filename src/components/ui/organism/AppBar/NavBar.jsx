@@ -1,25 +1,43 @@
 import React from "react";
-import { AppBar, Button, CssBaseline, Toolbar } from "@mui/material";
+import { AppBar, CssBaseline, Grid, Toolbar, Button } from "@mui/material";
+
 import { NavLogo } from "../../atoms/NavLogo/NavLogo";
 import logo from "../../../../img/comercio-electronico.png";
-import { Box } from "@mui/system";
 import MenuIcon from "@mui/icons-material/Menu";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { MenuOption } from "../../molecules/MenuOption/MenuOption";
-import { makeStyles } from "@mui/styles";
+import { makeStyles, withStyles } from "@mui/styles";
+import { CartWidget } from "../../atoms/CartWidget/CartWidget";
+import { ItemListContainer } from "../../molecules/ItemListContainer/ItemListContainer";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
   },
   toolbar: {
+    height:"5rem",
     backgroundColor: "black",
     paddingTop: theme.spacing(2),
     paddingBottom: theme.spacing(2),
     paddingLeft: theme.spacing(2),
     paddingRight: theme.spacing(2),
   },
+  ini: {
+    display: "flex",
+    alignItems: "center",
+  },
 }));
+
+const ButtonCustom = withStyles((theme) => ({
+  root: {
+    "&.MuiButton-root": {
+      textTransform: "none",
+      color: "white",
+      fontSize: "1rem",
+
+    },
+  },
+}))(Button);
 
 export const NavBar = () => {
   const classes = useStyles();
@@ -37,30 +55,52 @@ export const NavBar = () => {
 
       <AppBar position="static" className={classes.root} elevation={1}>
         <Toolbar disableGutters className={classes.toolbar}>
-          <NavLogo logo={logo} />
+          <Grid container>
+            <Grid item xs={2} className={classes.ini}>
+              <NavLogo logo={logo} />
+            </Grid>
 
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-            <MenuOption icon={<MenuIcon />} tooltip={"Items"} items={pages} />
-          </Box>
+            <Grid
+              item
+              xs={5}
+              sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}
+            >
+              <MenuOption
+                icon={<MenuIcon fontSize="large" />}
+                tooltip={"Items"}
+                items={pages}
+              />
+            </Grid>
 
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
-              <Button key={page} onClick={handleItem} sx={{ color: "white" }}>
-                {page}
-              </Button>
-            ))}
-          </Box>
+            <Grid
+              item
+              xs={5}
+              sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}
+            >
+              {pages.map((page) => (
+                <ButtonCustom key={page} onClick={handleItem}>
+                  {page}
+                </ButtonCustom>
+              ))}
+            </Grid>
 
-          <Box sx={{ flexGrow: 0 }}>
-            <MenuOption
-              icon={<AccountCircleIcon />}
-              tooltip={"Items"}
-              items={settings}
-            />
-          </Box>
+            <Grid
+              item
+              xs={5}
+              sx={{ flexGrow: 0, display: "flex", justifyContent: "flex-end" }}
+            >
+              <CartWidget itemNumber="3" />
+              <MenuOption
+                icon={<AccountCircleIcon fontSize="large" />}
+                tooltip={"Items"}
+                items={settings}
+              />
+            </Grid>
+          </Grid>
         </Toolbar>
       </AppBar>
 
+      <ItemListContainer/>
     </>
   );
 };
