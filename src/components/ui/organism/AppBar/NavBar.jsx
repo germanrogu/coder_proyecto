@@ -100,7 +100,7 @@ export const NavBar = () => {
         </Toolbar>
       </AppBar>
 
-      <ItemListContainer/>
+      <ItemListContainer greeting={"Titulo provisional para la lista de items"}/>
     </>
   );
 };
