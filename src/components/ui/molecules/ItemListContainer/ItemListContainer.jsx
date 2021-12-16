@@ -2,10 +2,10 @@ import React from 'react'
 import { Typography } from '@mui/material'
 
 
-export const ItemListContainer = () => {
+export const ItemListContainer = ({greeting}) => {
     return (
         <div>
-            <Typography>Titulo provisional para la lista de items</Typography>
+            <Typography>{greeting}</Typography>
         </div>
     )
 }
