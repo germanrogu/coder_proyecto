@@ -28,13 +28,12 @@ export const ItemCount = ({ stock = 10, initial = 1, onAdd }) => {
     setCounter(Math.max(counter - 1, 1));
   };
 
- 
   const onAddElements = () => {
     if (counter <= stock) {
-      console.log("Hay " + counter + " seleccionados");
     }
+    //onAdd(counter)
+    console.log("Cantidad confirmada: " + counter);
   };
-  
 
   return (
     <>
@@ -52,7 +51,7 @@ export const ItemCount = ({ stock = 10, initial = 1, onAdd }) => {
         </Button>
       </ButtonGroup>
 
-      <ButtonCustom  onClick={onAddElements} variant="outlined">
+      <ButtonCustom onClick={onAddElements} variant="outlined">
         Agregar al carrito
       </ButtonCustom>
     </>
