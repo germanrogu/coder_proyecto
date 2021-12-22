@@ -1,17 +1,16 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+//1) tener a react en scope 
+import React from 'react'
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+//2) Tener reactDom en el scope
+import ReactDom from 'react-dom'
+
+//3) Tener por lo menos un componente
+import {App} from './App'
+
+
+//4) lleva dos parametros a,b -> a lo que se quiere ver - b donde se va a ver
+//Mostrar la aplicación en el Dom 
+ReactDom.render(
+    <App />, 
+document.getElementById('root')
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
