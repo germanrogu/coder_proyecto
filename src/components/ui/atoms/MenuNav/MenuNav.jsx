@@ -16,7 +16,7 @@ export const MenuNav = ({ anchorEl, open, onClose, items }) => {
     <>
       <StyledMenu
         elevation={0}
-        getContentAnchorEl={null}
+        getcontentanchorel={null}
         anchorOrigin={{
           vertical: "bottom",
           horizontal: "center",

@@ -3,6 +3,7 @@ import { Badge, IconButton, Tooltip } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 export const CartWidget = ({ itemNumber }) => {
+  // eslint-disable-next-line no-unused-vars
   const [anchorEl, setAnchorEl] = useState(null);
   //const openAccount = Boolean(anchorEl);
 
