@@ -1,11 +1,14 @@
-import React, { useEffect } from "react";
-import { Typography } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import { Box, CircularProgress, Typography } from "@mui/material";
 import { ItemCount } from "../ItemCount/ItemCount";
 import { ItemList } from "../ItemList/ItemList";
 import macallan from "../../../../img/macallan.png";
 import monkey from "../../../../img/monkey.png";
 
 export const ItemListContainer = ({ greeting }) => {
+  const [product, setProduct] = useState([]);
+  const [loading, setLoading] = useState(false);
+
   const items = [
     {
       id: 1,
@@ -28,18 +31,38 @@ export const ItemListContainer = ({ greeting }) => {
   ];
 
   useEffect(() => {
+    setLoading(true);
+    //Haría el pedido a una API REST o DB
+    //Consigo el resultado o archivo
+    //Modifico el estado
 
+    const promise = new Promise((res, rej) => {
+      setTimeout(() => {
+        res(items);
+      }, 2000);
+    });
 
+    promise.then((items) => {
+      setProduct(items);
+      setLoading(false);
+    });
+    // promise.catch(() => {});
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const onAdd =()=>{
-  }
+  const onAdd = () => {};
 
   return (
     <div style={{ padding: "2rem" }}>
       <Typography>{greeting}</Typography>
 
-      <ItemList items={items} />
+      {!loading ? (
+        <ItemList items={product} />
+      ) : (
+        <Box sx={{ display: "flex" }}>
+          <CircularProgress />
+        </Box>
+      )}
 
       <ItemCount stock={15} initial={1} onAdd={onAdd} />
     </div>
