@@ -9,6 +9,7 @@ import { MenuOption } from "../../molecules/MenuOption/MenuOption";
 import { makeStyles, withStyles } from "@mui/styles";
 import { CartWidget } from "../../atoms/CartWidget/CartWidget";
 import { ItemListContainer } from "../../molecules/ItemListContainer/ItemListContainer";
+import { ItemDetailContainer } from "../../molecules/ItemDetailContainer/ItemDetailContainer";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -100,7 +101,9 @@ export const NavBar = () => {
         </Toolbar>
       </AppBar>
 
-      <ItemListContainer greeting={"Titulo provisional para la lista de items"}/>
+      <ItemListContainer greeting={"Licores"}/>
+
+      <ItemDetailContainer/>
     </>
   );
 };
