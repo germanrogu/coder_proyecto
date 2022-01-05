@@ -10,14 +10,15 @@ export const ItemList = ({ items, onAdd }) => {
         {items.map((item) => (
           <Grid item xs={12} md={3} key={item.id}>
             <Item
-              stock={item.stockNumber}
+              id={item.id}
+              //stock={item.stockNumber}
+              stock={10}
               initial={1}
               onAdd={onAdd}
-              titleItem={item.titleItem}
-              productName={item.productName}
+              titleItem={item.title}
+              category={item.category}
               description={item.description}
-              urlImg={item.urlImg}
-              stockNumber={item.stockNumber}
+              urlImg={item.image}
             />
           </Grid>
         ))}

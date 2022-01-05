@@ -7,12 +7,17 @@ import { withStyles } from "@mui/styles";
 const ButtonCustom = withStyles((theme) => ({
   root: {
     "&.MuiButton-root": {
+      backgroundColor: "#1976d2",
       textTransform: "none",
-      color: "Black",
+      color: "white",
       fontSize: "1rem",
-      fontWeight: "bold",
+      fontWeight: "600",
       padding: theme.spacing(1),
       borderRadius: "10px",
+      margin: theme.spacing(2),
+    },
+    "&.MuiButton-root:hover": {
+      backgroundColor: "#074b8f",
     },
   },
 }))(Button);
@@ -36,24 +41,28 @@ export const ItemCount = ({ stock = 10, initial = 1, onAdd }) => {
   };
 
   return (
-    <>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+      }}
+    >
       <ButtonGroup variant="outlined" aria-label="outlined button group">
-        <Button onClick={addElement}>
-          <AddCircleOutlineIcon />
+        <Button onClick={removeElement}>
+          <RemoveCircleOutlineIcon />
         </Button>
-
+        
         <Button variant="outlined" disabled>
           {counter}
         </Button>
 
-        <Button onClick={removeElement}>
-          <RemoveCircleOutlineIcon />
+        <Button onClick={addElement}>
+          <AddCircleOutlineIcon />
         </Button>
       </ButtonGroup>
 
-      <ButtonCustom onClick={onAddElements} variant="outlined">
-        Agregar al carrito
-      </ButtonCustom>
-    </>
+      <ButtonCustom onClick={onAddElements}>Agregar al carrito</ButtonCustom>
+    </div>
   );
 };
