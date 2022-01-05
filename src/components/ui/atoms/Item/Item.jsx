@@ -2,19 +2,21 @@ import {
   Button,
   Card,
   CardActions,
-  CardContent,
+  // CardContent,
   CardHeader,
   CardMedia,
   IconButton,
-  Typography,
+  // Typography,
 } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import React from "react";
 import { withStyles } from "@mui/styles";
 import { ItemCount } from "../../molecules/ItemCount/ItemCount";
+import { Link } from "react-router-dom";
 
 const CardCustom = withStyles((theme) => ({
   root: {
+    textAlign: "center",
     "&.MuiCard-root": {
       margin: "1.6rem",
       borderRadius: "10px",
@@ -26,31 +28,35 @@ const ButtonCustom = withStyles((theme) => ({
   root: {
     "&.MuiButton-root": {
       textTransform: "none",
-      color: "Black",
+      color: "black",
       fontSize: "1rem",
-      fontWeight: "bold",
+      fontWeight: "400",
       padding: theme.spacing(1),
       borderRadius: "10px",
+    },
+    "&.MuiButton-root:hover": {
+      backgroundColor: "#C1D1D6",
     },
   },
 }))(Button);
 
 export const Item = ({
+  id,
   stock,
   initial,
   onAdd,
   titleItem,
-  productName,
-  description,
+  category,
+  // description,
   urlImg,
-  stockNumber,
+  //stockNumber,
 }) => {
   return (
     <>
       <CardCustom>
         <CardHeader
           title={titleItem}
-          subheader={productName + " - Stock: " + stockNumber}
+          subheader={category + " - Stock: " + stock}
           action={
             <IconButton aria-label="add to favorites">
               <FavoriteIcon />
@@ -64,15 +70,23 @@ export const Item = ({
           alt="Paella dish"
           sx={{ objectFit: "contain" }}
         />
-        <CardContent>
+        {/* <CardContent>
           <Typography variant="body2" color="text.secondary">
             {description.length > 120
               ? description.substring(0, 120 - 3) + " ..."
               : description}
           </Typography>
-        </CardContent>
-        <CardActions disableSpacing>
-          <ButtonCustom size="small">Ver más</ButtonCustom>
+        </CardContent> */}
+        <CardActions
+          disableSpacing
+          sx={{ display: "flex", justifyContent: "center" }}
+        >
+          <Link
+            to={`/item/${id}`}
+            style={{ display: "flex", textDecoration: "none" }}
+          >
+            <ButtonCustom>Más información</ButtonCustom>
+          </Link>
         </CardActions>
         <ItemCount stock={stock} initial={initial} onAdd={onAdd} />
       </CardCustom>

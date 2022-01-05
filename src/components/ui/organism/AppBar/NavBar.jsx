@@ -8,15 +8,14 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { MenuOption } from "../../molecules/MenuOption/MenuOption";
 import { makeStyles, withStyles } from "@mui/styles";
 import { CartWidget } from "../../atoms/CartWidget/CartWidget";
-import { ItemListContainer } from "../../molecules/ItemListContainer/ItemListContainer";
-import { ItemDetailContainer } from "../../molecules/ItemDetailContainer/ItemDetailContainer";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
   },
   toolbar: {
-    height:"5rem",
+    height: "5rem",
     backgroundColor: "black",
     paddingTop: theme.spacing(2),
     paddingBottom: theme.spacing(2),
@@ -35,7 +34,6 @@ const ButtonCustom = withStyles((theme) => ({
       textTransform: "none",
       color: "white",
       fontSize: "1rem",
-
     },
   },
 }))(Button);
@@ -43,7 +41,7 @@ const ButtonCustom = withStyles((theme) => ({
 export const NavBar = () => {
   const classes = useStyles();
 
-  const pages = ["Productos", "Nosotros", "Blog"];
+  const pages = ["Electronics", "Jewelery", "Men's clothing","Women's clothing"];
   const settings = ["Perfil", "Configuración", "Cerrar sesión"];
 
   const handleItem = () => {
@@ -79,9 +77,15 @@ export const NavBar = () => {
               sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}
             >
               {pages.map((page) => (
-                <ButtonCustom key={page} onClick={handleItem}>
-                  {page}
-                </ButtonCustom>
+                <Link
+                  to={`/categoria/${page}`}
+                  style={{ display: "flex", textDecoration: "none" }}
+                  key={page}
+                >
+                  <ButtonCustom  onClick={handleItem}>
+                    {page}
+                  </ButtonCustom>
+                </Link>
               ))}
             </Grid>
 
@@ -100,10 +104,6 @@ export const NavBar = () => {
           </Grid>
         </Toolbar>
       </AppBar>
-
-      <ItemListContainer greeting={"Licores"}/>
-
-      <ItemDetailContainer/>
     </>
   );
 };

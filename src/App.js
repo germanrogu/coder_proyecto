@@ -3,7 +3,7 @@ import React from 'react'
 
 import { createTheme } from '@mui/material';
 import { ThemeProvider } from '@mui/styles'
-import { NavBar } from './components/ui/organism/AppBar/NavBar'
+import { AppRouter } from './routes/AppRouter';
 
 export const theme = createTheme({
 
@@ -52,7 +52,7 @@ export const theme = createTheme({
 export const App = () => {
     return (
         <ThemeProvider theme={theme}>
-            <NavBar />
+            <AppRouter />
         </ThemeProvider>
 
     )
