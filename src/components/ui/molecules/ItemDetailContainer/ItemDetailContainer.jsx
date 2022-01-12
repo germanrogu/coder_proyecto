@@ -9,6 +9,7 @@ import { ItemDetail } from "../../molecules/ItemDetail/ItemDetail";
 export const ItemDetailContainer = () => {
   const [product, setProduct] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [added, setAdded] = useState(false);
   const { id } = useParams();
   // const item = {
   //   id: 2,
@@ -56,12 +57,15 @@ export const ItemDetailContainer = () => {
       });
   }, [id]);
 
-  const onAdd = () => {};
+  const onAdd = (count) => {
+    console.log(`Agregaste ${product.title}, cantidad: ${count} .`);
+    setAdded(true)
+  };
 
   return (
     <div>
       {!loading ? (
-        <ItemDetail product={product} onAdd={onAdd} />
+        <ItemDetail product={product} onAdd={onAdd} added={added} />
       ) : (
         <Box sx={{ display: "flex" }}>
           <CircularProgress />

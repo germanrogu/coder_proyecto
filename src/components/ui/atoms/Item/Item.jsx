@@ -55,6 +55,7 @@ export const Item = ({
     <>
       <CardCustom>
         <CardHeader
+          
           title={titleItem}
           subheader={category + " - Stock: " + stock}
           action={

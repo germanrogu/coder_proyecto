@@ -33,12 +33,6 @@ export const ItemCount = ({ stock = 10, initial = 1, onAdd }) => {
     setCounter(Math.max(counter - 1, 1));
   };
 
-  const onAddElements = () => {
-    if (counter <= stock) {
-    }
-    //onAdd(counter)
-    console.log("Cantidad confirmada: " + counter);
-  };
 
   return (
     <div
@@ -52,7 +46,7 @@ export const ItemCount = ({ stock = 10, initial = 1, onAdd }) => {
         <Button onClick={removeElement}>
           <RemoveCircleOutlineIcon />
         </Button>
-        
+
         <Button variant="outlined" disabled>
           {counter}
         </Button>
@@ -62,7 +56,9 @@ export const ItemCount = ({ stock = 10, initial = 1, onAdd }) => {
         </Button>
       </ButtonGroup>
 
-      <ButtonCustom onClick={onAddElements}>Agregar al carrito</ButtonCustom>
+      <ButtonCustom onClick={() => onAdd(counter)}>
+        Agregar al carrito
+      </ButtonCustom>
     </div>
   );
 };
