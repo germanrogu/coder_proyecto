@@ -1,7 +1,8 @@
-import { Box, CircularProgress } from "@mui/material";
+import { Box } from "@mui/material";
 import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { CartContext } from "../../../../context/CartContext";
+import { LoadingScreen } from "../../atoms/LoadingScreen/LoadingScreen";
 // import image1 from "../../../../img/1.png";
 // import image2 from "../../../../img/2.png";
 // import image3 from "../../../../img/3.png";
@@ -71,7 +72,7 @@ export const ItemDetailContainer = () => {
         <ItemDetail product={product} onAdd={onAdd} added={added} />
       ) : (
         <Box sx={{ display: "flex" }}>
-          <CircularProgress />
+          <LoadingScreen/>
         </Box>
       )}
     </div>

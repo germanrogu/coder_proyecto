@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Box, CircularProgress, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { ItemList } from "../ItemList/ItemList";
 // import macallan from "../../../../img/macallan.png";
 // import monkey from "../../../../img/monkey.png";
 import { useParams } from "react-router-dom";
+import { LoadingScreen } from "../../atoms/LoadingScreen/LoadingScreen";
 
 export const ItemListContainer = ({ greeting }) => {
   const [product, setProduct] = useState([]);
@@ -80,7 +81,6 @@ export const ItemListContainer = ({ greeting }) => {
       .then((products) => {
         setProduct(products);
         setLoading(false);
-        
       })
       .catch((err) => {
         console.error(err);
@@ -97,7 +97,7 @@ export const ItemListContainer = ({ greeting }) => {
         <ItemList items={product} onAdd={onAdd} />
       ) : (
         <Box sx={{ display: "flex" }}>
-          <CircularProgress />
+          <LoadingScreen />
         </Box>
       )}
     </div>
