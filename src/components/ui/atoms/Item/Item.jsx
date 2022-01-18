@@ -85,10 +85,9 @@ export const Item = ({
             to={`/item/${id}`}
             style={{ display: "flex", textDecoration: "none" }}
           >
-            <ButtonCustom>Más información</ButtonCustom>
+            <ButtonCustom>Detalle</ButtonCustom>
           </Link>
         </CardActions>
-        <ItemCount stock={stock} initial={initial} onAdd={onAdd} />
       </CardCustom>
     </>
   );

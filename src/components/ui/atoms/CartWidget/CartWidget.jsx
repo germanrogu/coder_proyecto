@@ -15,9 +15,10 @@ export const CartWidget = ({ itemNumber }) => {
     setAnchorEl(event.currentTarget);
   };
 
-//   const handleClose = () => {
-//     setAnchorEl(null);
-//   };
+  //   const handleClose = () => {
+  //     setAnchorEl(null);
+  //   };
+
   return (
     <Tooltip title={"Carrito"}>
       <IconButton

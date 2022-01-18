@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { AppBar, CssBaseline, Grid, Toolbar, Button } from "@mui/material";
 
 import { NavLogo } from "../../atoms/NavLogo/NavLogo";
@@ -9,6 +9,7 @@ import { MenuOption } from "../../molecules/MenuOption/MenuOption";
 import { makeStyles, withStyles } from "@mui/styles";
 import { CartWidget } from "../../atoms/CartWidget/CartWidget";
 import { Link } from "react-router-dom";
+import { CartContext } from "../../../../context/CartContext";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -40,12 +41,18 @@ const ButtonCustom = withStyles((theme) => ({
 
 export const NavBar = () => {
   const classes = useStyles();
+  const { cartCounter } = useContext(CartContext);
 
-  const pages = ["Electronics", "Jewelery", "Men's clothing","Women's clothing"];
+  const pages = [
+    "Electronics",
+    "Jewelery",
+    "Men's clothing",
+    "Women's clothing",
+  ];
   const settings = ["Perfil", "Configuración", "Cerrar sesión"];
 
   const handleItem = () => {
-    console.log("Item");
+    // console.log("Item");
   };
 
   return (
@@ -82,9 +89,7 @@ export const NavBar = () => {
                   style={{ display: "flex", textDecoration: "none" }}
                   key={page}
                 >
-                  <ButtonCustom  onClick={handleItem}>
-                    {page}
-                  </ButtonCustom>
+                  <ButtonCustom onClick={handleItem}>{page}</ButtonCustom>
                 </Link>
               ))}
             </Grid>
@@ -94,7 +99,12 @@ export const NavBar = () => {
               xs={5}
               sx={{ flexGrow: 0, display: "flex", justifyContent: "flex-end" }}
             >
-              <CartWidget itemNumber="3" />
+              <Link
+                to={`/cart`}
+                style={{ display: "flex", textDecoration: "none" }}
+              >
+                <CartWidget itemNumber={cartCounter()} />
+              </Link>
               <MenuOption
                 icon={<AccountCircleIcon fontSize="large" />}
                 tooltip={"Items"}

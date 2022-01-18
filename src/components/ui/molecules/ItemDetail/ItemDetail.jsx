@@ -5,13 +5,14 @@ import { ImageGrid } from "../../atoms/ImageGrid/ImageGrid";
 import { MainImage } from "../../atoms/MainImage/MainImage";
 import { ProductInformation } from "../../atoms/ProductInformation/ProductInformation";
 
-export const ItemDetail = ({ product, onAdd }) => {
+export const ItemDetail = ({ product, onAdd, added }) => {
   const [selectedImage, setSelectedImage] = useState(0);
   // const [mainImage, setMainImage] = useState([]);
 
   // useEffect(() => {
   //   setMainImage(product.images);
   // }, [product]);
+
   return (
     <Grid container spacing={1} sx={{ maxWidth: 1100, margin: "0 auto" }}>
       <Grid item sm={1}>
@@ -26,7 +27,7 @@ export const ItemDetail = ({ product, onAdd }) => {
         <MainImage src={product.image} />
       </Grid>
       <Grid item sm={6}>
-        <ProductInformation product={product} onAdd={onAdd} />
+        <ProductInformation product={product} onAdd={onAdd} added={added} />
       </Grid>
     </Grid>
   );

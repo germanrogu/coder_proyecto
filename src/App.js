@@ -4,6 +4,7 @@ import React from 'react'
 import { createTheme } from '@mui/material';
 import { ThemeProvider } from '@mui/styles'
 import { AppRouter } from './routes/AppRouter';
+import { CartProvider } from './context/CartContext';
 
 export const theme = createTheme({
 
@@ -51,9 +52,11 @@ export const theme = createTheme({
 
 export const App = () => {
     return (
-        <ThemeProvider theme={theme}>
-            <AppRouter />
-        </ThemeProvider>
+        <CartProvider>
+            <ThemeProvider theme={theme}>
+                <AppRouter />
+            </ThemeProvider>
+        </CartProvider>
 
     )
 }

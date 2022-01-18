@@ -1,6 +1,8 @@
-import { Box, CircularProgress } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import { Box } from "@mui/material";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { CartContext } from "../../../../context/CartContext";
+import { LoadingScreen } from "../../atoms/LoadingScreen/LoadingScreen";
 // import image1 from "../../../../img/1.png";
 // import image2 from "../../../../img/2.png";
 // import image3 from "../../../../img/3.png";
@@ -9,7 +11,9 @@ import { ItemDetail } from "../../molecules/ItemDetail/ItemDetail";
 export const ItemDetailContainer = () => {
   const [product, setProduct] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [added, setAdded] = useState(false);
   const { id } = useParams();
+  const {addToCart} = useContext(CartContext)
   // const item = {
   //   id: 2,
   //   titleItem: "GIFTPACK TANQUERAY",
@@ -56,15 +60,19 @@ export const ItemDetailContainer = () => {
       });
   }, [id]);
 
-  const onAdd = () => {};
+  const onAdd = (count) => {
+    addToCart(product,count)
+    // console.log(`Agregaste ${product.title}, cantidad: ${count} .`);
+    setAdded(true)
+  };
 
   return (
     <div>
       {!loading ? (
-        <ItemDetail product={product} onAdd={onAdd} />
+        <ItemDetail product={product} onAdd={onAdd} added={added} />
       ) : (
         <Box sx={{ display: "flex" }}>
-          <CircularProgress />
+          <LoadingScreen/>
         </Box>
       )}
     </div>
