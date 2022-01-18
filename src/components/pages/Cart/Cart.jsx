@@ -24,19 +24,34 @@ export const Cart = () => {
   return (
     <>
       {cartArray.length !== 0 ? (
-        <Grid container spacing={1}>
-          {cartArray.map((item) => (
-            <Grid item xs={12} md={12} key={item.product.id}>
-              <CartItem product={item} deleteItem={deleteItem} />
-            </Grid>
-          ))}
-        </Grid>
+        <>
+          <Grid container spacing={1}>
+            {cartArray.map((item) => (
+              <Grid item xs={12} md={12} key={item.product.id}>
+                <CartItem product={item} deleteItem={deleteItem} />
+              </Grid>
+            ))}
+          </Grid>
+          <Link
+            to={`/`}
+            style={{
+              display: "flex",
+              textDecoration: "none",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            <ButtonCustom variant="contained" color="primary">
+              Seguir comprando
+            </ButtonCustom>
+          </Link>
+          
+        </>
       ) : (
         <>
           <Typography
             style={{
               display: "flex",
-
               justifyContent: "center",
             }}
           >
