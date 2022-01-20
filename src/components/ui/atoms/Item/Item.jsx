@@ -11,7 +11,6 @@ import {
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import React from "react";
 import { withStyles } from "@mui/styles";
-import { ItemCount } from "../../molecules/ItemCount/ItemCount";
 import { Link } from "react-router-dom";
 
 const CardCustom = withStyles((theme) => ({
