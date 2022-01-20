@@ -4,10 +4,16 @@ export const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
   const [cartArray, setCartArray] = useState([]);
+  //const [totalPrice, setTotalPrice] = useState(0)
 
   const addToCart = (product, quantity) => {
     if (isInCart(product.id)) {
-      console.log("Ya esta el producto en el carrito"); //Accion para sumar a cantidad
+      // console.log("Ya esta el producto en el carrito"); //Accion para sumar a cantidad
+
+      const addEqual = cartArray.findIndex(
+        (element) => element.product.id === product.id
+      );
+      cartArray[addEqual].quantity = cartArray[addEqual].quantity + quantity;
     } else {
       // console.log(`Agregaste ${product.title}, cantidad: ${quantity} .`);
       const newItem = {
@@ -34,11 +40,28 @@ export const CartProvider = ({ children }) => {
   };
 
   const cartCounter = () => {
-    return cartArray.reduce((previousValue, item) => previousValue = previousValue + item.quantity,0) 
-  }
+    return cartArray.reduce(
+      (previousValue, item) => (previousValue = previousValue + item.quantity),
+      0
+    );
+  };
+
+  const totalPrice = () => {
+    const arrayMap = cartArray
+      .map(
+        (item) =>
+          item.product.price * item.quantity
+      )
+      .reduce((previousValue, item) => previousValue + item);
+
+    return Math.round(arrayMap * 100) / 100;
+  };
+
+  
 
   const value = {
     cartArray,
+    totalPrice,
     addToCart,
     deleteItem,
     clearCart,
