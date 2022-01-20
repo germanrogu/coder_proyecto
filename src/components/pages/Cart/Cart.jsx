@@ -19,7 +19,8 @@ const ButtonCustom = withStyles((theme) => ({
 }))(Button);
 
 export const Cart = () => {
-  const { cartArray, deleteItem } = useContext(CartContext);
+  const { cartArray, deleteItem, totalPrice, clearCart } =
+    useContext(CartContext);
 
   return (
     <>
@@ -31,21 +32,66 @@ export const Cart = () => {
                 <CartItem product={item} deleteItem={deleteItem} />
               </Grid>
             ))}
+            <Grid item xs={12} md={6}>
+              <Typography variant="h5">{`Total : $ ${totalPrice()}`}</Typography>
+            </Grid>
           </Grid>
-          <Link
-            to={`/`}
-            style={{
-              display: "flex",
-              textDecoration: "none",
-              flexDirection: "column",
-              alignItems: "center",
-            }}
-          >
-            <ButtonCustom variant="contained" color="primary">
-              Seguir comprando
-            </ButtonCustom>
-          </Link>
-          
+
+          <Grid container spacing={1}>
+            <Grid
+              item
+              xs={12}
+              md={4}
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+              }}
+            >
+              <Link
+                to={`/`}
+                style={{
+                  display: "flex",
+                  textDecoration: "none",
+                  flexDirection: "column",
+                  alignItems: "center",
+                }}
+              >
+                <ButtonCustom variant="contained" color="secondary">
+                  Seguir comprando
+                </ButtonCustom>
+              </Link>
+            </Grid>
+            <Grid
+              item
+              xs={12}
+              md={4}
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+              }}
+            >
+              <ButtonCustom variant="contained" color="success">
+                Hacer pedido
+              </ButtonCustom>
+            </Grid>
+            <Grid
+              item
+              xs={12}
+              md={4}
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+              }}
+            >
+              <ButtonCustom
+                onClick={() => clearCart()}
+                variant="contained"
+                color="error"
+              >
+                Vaciar carrito
+              </ButtonCustom>
+            </Grid>
+          </Grid>
         </>
       ) : (
         <>

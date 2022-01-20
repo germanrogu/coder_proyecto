@@ -6,6 +6,7 @@ import { MainImage } from "../../atoms/MainImage/MainImage";
 import { ProductInformation } from "../../atoms/ProductInformation/ProductInformation";
 
 export const ItemDetail = ({ product, onAdd, added }) => {
+  const { image } = product;
   const [selectedImage, setSelectedImage] = useState(0);
   // const [mainImage, setMainImage] = useState([]);
 
@@ -17,14 +18,14 @@ export const ItemDetail = ({ product, onAdd, added }) => {
     <Grid container spacing={1} sx={{ maxWidth: 1100, margin: "0 auto" }}>
       <Grid item sm={1}>
         <ImageGrid
-          images={product.image}
+          images={image}
           onSelect={setSelectedImage}
           selectedImage={selectedImage}
         />
       </Grid>
       <Grid item sm={5} sx={{ paddingRight: "2rem", paddingLeft: "2rem" }}>
         {/* <MainImage src={mainImage[selectedImage]} /> */}
-        <MainImage src={product.image} />
+        <MainImage src={image} />
       </Grid>
       <Grid item sm={6}>
         <ProductInformation product={product} onAdd={onAdd} added={added} />

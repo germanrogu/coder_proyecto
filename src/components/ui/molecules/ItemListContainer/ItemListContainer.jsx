@@ -5,6 +5,8 @@ import { ItemList } from "../ItemList/ItemList";
 // import monkey from "../../../../img/monkey.png";
 import { useParams } from "react-router-dom";
 import { LoadingScreen } from "../../atoms/LoadingScreen/LoadingScreen";
+import { db } from "../../../../firebase";
+import { collection, getDocs, query, where } from "firebase/firestore";
 
 export const ItemListContainer = ({ greeting }) => {
   const [product, setProduct] = useState([]);
@@ -72,19 +74,48 @@ export const ItemListContainer = ({ greeting }) => {
   useEffect(() => {
     setLoading(true);
 
-    const getProducts = id
-      ? fetch(`https://fakestoreapi.com/products/category/${id.toLowerCase()}`)
-      : fetch("https://fakestoreapi.com/products");
+    const productsCollection = collection(db, "productos");
 
-    getProducts
-      .then((response) => response.json())
-      .then((products) => {
-        setProduct(products);
+    //const filterCategory = where("category", "==", id.toLowerCase() || " ");
+    //const queryDocs = query(productsCollection, filterCategory);
+    // const getDocuments = getDocs(queryDocs);
+
+    const getDocuments = id
+      ? getDocs(
+          query(
+            productsCollection,
+            where("category", "==", id.toLowerCase() || " ")
+          )
+        )
+      : getDocs(productsCollection);
+
+    getDocuments
+      .then((response) => {
+        const docs = response.docs;
+        const docsFormat = docs.map((doc) => {
+          return doc.data();
+        });
+        setProduct(docsFormat);
         setLoading(false);
       })
       .catch((err) => {
         console.error(err);
       });
+
+    // Obtener los datos desde un api utilizando fetch
+    // const getProducts = id
+    //   ? fetch(`https://fakestoreapi.com/products/category/${id.toLowerCase()}`)
+    //   : fetch("https://fakestoreapi.com/products");
+
+    // getProducts
+    //   .then((response) => response.json())
+    //   .then((products) => {
+    //     setProduct(products);
+    //     setLoading(false);
+    //   })
+    //   .catch((err) => {
+    //     console.error(err);
+    //   });
   }, [id]);
 
   const onAdd = () => {};

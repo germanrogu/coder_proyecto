@@ -2,18 +2,20 @@ import { Box } from "@mui/material";
 import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { CartContext } from "../../../../context/CartContext";
+import { db } from "../../../../firebase";
 import { LoadingScreen } from "../../atoms/LoadingScreen/LoadingScreen";
 // import image1 from "../../../../img/1.png";
 // import image2 from "../../../../img/2.png";
 // import image3 from "../../../../img/3.png";
 import { ItemDetail } from "../../molecules/ItemDetail/ItemDetail";
+import { collection, where, getDocs, query } from "firebase/firestore";
 
 export const ItemDetailContainer = () => {
   const [product, setProduct] = useState([]);
   const [loading, setLoading] = useState(false);
   const [added, setAdded] = useState(false);
   const { id } = useParams();
-  const {addToCart} = useContext(CartContext)
+  const { addToCart } = useContext(CartContext);
   // const item = {
   //   id: 2,
   //   titleItem: "GIFTPACK TANQUERAY",
@@ -47,23 +49,41 @@ export const ItemDetailContainer = () => {
   useEffect(() => {
     setLoading(true);
 
-    const getProducts = fetch(`https://fakestoreapi.com/products/${id}`);
-
-    getProducts
-      .then((response) => response.json())
-      .then((items) => {
-        setProduct(items);
+    const productsCollection = collection(db, "productos");
+    const filter = where("id", "==", Number(id));
+    const consult = query(productsCollection, filter);
+    const getDocuments = getDocs(consult);
+    getDocuments
+      .then((response) => {
+        const docs = response.docs;
+        const docsFormat = docs.map((doc) => {
+          return doc.data();
+        });
+        const result = docsFormat.find((element) => element.id === Number(id));
+        setProduct(result);
         setLoading(false);
       })
-      .catch((err) => {
-        console.error(err);
+      .catch((error) => {
+        console.log(error);
       });
+
+    // const getProducts = fetch(`https://fakestoreapi.com/products/${id}`);
+
+    // getProducts
+    //   .then((response) => response.json())
+    //   .then((items) => {
+    //     setProduct(items);
+    //     setLoading(false);
+    //   })
+    //   .catch((err) => {
+    //     console.error(err);
+    //   });
   }, [id]);
 
   const onAdd = (count) => {
-    addToCart(product,count)
+    addToCart(product, count);
     // console.log(`Agregaste ${product.title}, cantidad: ${count} .`);
-    setAdded(true)
+    setAdded(true);
   };
 
   return (
@@ -72,7 +92,7 @@ export const ItemDetailContainer = () => {
         <ItemDetail product={product} onAdd={onAdd} added={added} />
       ) : (
         <Box sx={{ display: "flex" }}>
-          <LoadingScreen/>
+          <LoadingScreen />
         </Box>
       )}
     </div>
