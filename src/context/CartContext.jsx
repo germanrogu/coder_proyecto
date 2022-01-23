@@ -48,16 +48,11 @@ export const CartProvider = ({ children }) => {
 
   const totalPrice = () => {
     const arrayMap = cartArray
-      .map(
-        (item) =>
-          item.product.price * item.quantity
-      )
-      .reduce((previousValue, item) => previousValue + item);
+      .map((item) => item.product.price * item.quantity)
+      .reduce((previousValue, item) => previousValue + item, 0);
 
     return Math.round(arrayMap * 100) / 100;
   };
-
-  
 
   const value = {
     cartArray,

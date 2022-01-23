@@ -70,9 +70,19 @@ export const Cart = () => {
                 justifyContent: "center",
               }}
             >
-              <ButtonCustom variant="contained" color="success">
-                Hacer pedido
-              </ButtonCustom>
+              <Link
+                to={`/purchase`}
+                style={{
+                  display: "flex",
+                  textDecoration: "none",
+                  flexDirection: "column",
+                  alignItems: "center",
+                }}
+              >
+                <ButtonCustom variant="contained" color="success">
+                  Hacer pedido
+                </ButtonCustom>
+              </Link>
             </Grid>
             <Grid
               item
