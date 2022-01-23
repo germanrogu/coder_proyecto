@@ -19,13 +19,9 @@ export const Purchase = () => {
   const orderCollection = collection(db, "orders");
 
   const onSubmit = (data) => {
-    console.log(data);
+    // console.log(data);
     const Total = totalPrice();
-    const items = {
-      cartArray,
-      Total,
-    };
-    console.log(items);
+    // console.log(items);
     const newOrder = {
       buyer: data,
       items: cartArray,
@@ -73,14 +69,14 @@ export const Purchase = () => {
           </Grid>
 
           <Grid item xs={12} md={6}>
-            {!!totalPrice ? (
+            {!orderId ? (
               <Typography variant="h5">{`Total : $ ${totalPrice()}`} </Typography>
             ) : (
               <></>
             )}
 
             {orderId ? (
-              <Typography variant="h5">{`Su orden se genero con el siguiente ID : ${orderId}`} </Typography>
+              <Typography variant="h5">{`Su orden se generó con el siguiente ID : ${orderId}`} </Typography>
             ) : (
               <></>
             )}
