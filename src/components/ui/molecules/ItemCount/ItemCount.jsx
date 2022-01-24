@@ -7,17 +7,17 @@ import { withStyles } from "@mui/styles";
 const ButtonCustom = withStyles((theme) => ({
   root: {
     "&.MuiButton-root": {
-      backgroundColor: "#1976d2",
       textTransform: "none",
-      color: "white",
+      color: "#3483fa",
       fontSize: "1rem",
       fontWeight: "600",
       padding: theme.spacing(1),
-      borderRadius: "10px",
+      borderRadius: "8px",
+      backgroundColor: "#4189e626",
       margin: theme.spacing(2),
     },
     "&.MuiButton-root:hover": {
-      backgroundColor: "#074b8f",
+      backgroundColor: "#4189e659",
     },
   },
 }))(Button);
@@ -57,7 +57,7 @@ export const ItemCount = ({ stock = 10, initial = 1, onAdd }) => {
       </ButtonGroup>
 
       <ButtonCustom onClick={() => onAdd(counter)}>
-        Agregar al carrito
+        Add to cart
       </ButtonCustom>
     </div>
   );

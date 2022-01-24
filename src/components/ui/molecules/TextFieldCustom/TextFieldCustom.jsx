@@ -26,16 +26,20 @@ const ButtonCustom = withStyles((theme) => ({
   root: {
     "&.MuiButton-root": {
       textTransform: "none",
-      color: "white",
+      color: "#3483fa",
       fontSize: "1rem",
-      fontWeight: "500",
+      fontWeight: "600",
       padding: theme.spacing(1),
-      borderRadius: "10px",
+      borderRadius: "8px",
+      backgroundColor: "#4189e626",
+    },
+    "&.MuiButton-root:hover": {
+      backgroundColor: "#4189e659",
     },
   },
 }))(Button);
 
-export const TextFieldCustom = ({onSubmit}) => {
+export const TextFieldCustom = ({ onSubmit }) => {
   const classes = useStyles();
   const { handleSubmit, control } = useForm();
 
@@ -47,12 +51,12 @@ export const TextFieldCustom = ({onSubmit}) => {
     <>
       <form className={classes.root} onSubmit={handleSubmit(onSubmit)}>
         <Controller
-          name={"Name"}
+          name={"fullName"}
           control={control}
           defaultValue=""
           render={({ field: { onChange, value }, fieldState: { error } }) => (
             <TextField
-              label={"Name"}
+              label={"Full name"}
               variant="filled"
               value={value}
               onChange={onChange}
@@ -60,7 +64,7 @@ export const TextFieldCustom = ({onSubmit}) => {
               helperText={error ? error.message : null}
             />
           )}
-          rules={{ required: "Name required" }}
+          rules={{ required: "Full name required" }}
         />
 
         <Controller
@@ -123,13 +127,11 @@ export const TextFieldCustom = ({onSubmit}) => {
               textDecoration: "none",
             }}
           >
-            <ButtonCustom variant="contained" color="secondary">
-              Cancelar
-            </ButtonCustom>
+            <ButtonCustom color="secondary">Cancel</ButtonCustom>
           </Link>
 
-          <ButtonCustom type="submit" variant="contained" color="primary">
-            Completar pedido
+          <ButtonCustom type="submit" color="primary">
+            Complete order
           </ButtonCustom>
         </div>
       </form>

@@ -2,11 +2,9 @@ import {
   Button,
   Card,
   CardActions,
-  // CardContent,
   CardHeader,
   CardMedia,
   IconButton,
-  // Typography,
 } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import React from "react";
@@ -27,14 +25,15 @@ const ButtonCustom = withStyles((theme) => ({
   root: {
     "&.MuiButton-root": {
       textTransform: "none",
-      color: "black",
+      color: "#3483fa",
       fontSize: "1rem",
-      fontWeight: "400",
+      fontWeight: "600",
       padding: theme.spacing(1),
-      borderRadius: "10px",
+      borderRadius: "8px",
+      backgroundColor: "#4189e626",
     },
     "&.MuiButton-root:hover": {
-      backgroundColor: "#C1D1D6",
+      backgroundColor: "#4189e659",
     },
   },
 }))(Button);
@@ -43,18 +42,15 @@ export const Item = ({
   id,
   stock,
   initial,
-  onAdd,
   titleItem,
   category,
-  // description,
   urlImg,
-  //stockNumber,
 }) => {
   return (
     <>
       <CardCustom>
         <CardHeader
-          title={titleItem}
+          title={titleItem.substring(0,25)+" ..."}
           subheader={category + " - Stock: " + stock}
           action={
             <IconButton aria-label="add to favorites">
@@ -64,18 +60,12 @@ export const Item = ({
         />
         <CardMedia
           component="img"
-          height="150"
+          height="130"
           image={urlImg}
-          alt="Paella dish"
+          alt={titleItem}
           sx={{ objectFit: "contain" }}
         />
-        {/* <CardContent>
-          <Typography variant="body2" color="text.secondary">
-            {description.length > 120
-              ? description.substring(0, 120 - 3) + " ..."
-              : description}
-          </Typography>
-        </CardContent> */}
+
         <CardActions
           disableSpacing
           sx={{ display: "flex", justifyContent: "center" }}
@@ -84,7 +74,7 @@ export const Item = ({
             to={`/item/${id}`}
             style={{ display: "flex", textDecoration: "none" }}
           >
-            <ButtonCustom>Detalle</ButtonCustom>
+            <ButtonCustom>Detail</ButtonCustom>
           </Link>
         </CardActions>
       </CardCustom>

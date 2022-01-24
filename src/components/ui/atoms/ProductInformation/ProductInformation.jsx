@@ -9,11 +9,16 @@ const ButtonCustom = withStyles((theme) => ({
   root: {
     "&.MuiButton-root": {
       textTransform: "none",
-      color: "white",
+      color: "#3483fa",
       fontSize: "1rem",
-      fontWeight: "bold",
+      fontWeight: "600",
       padding: theme.spacing(1),
-      borderRadius: "10px",
+      borderRadius: "8px",
+      backgroundColor: "#4189e626",
+      margin: theme.spacing(2),
+    },
+    "&.MuiButton-root:hover": {
+      backgroundColor: "#4189e659",
     },
   },
 }))(Button);
@@ -43,8 +48,8 @@ export const ProductInformation = ({
               alignItems: "center",
             }}
           >
-            <ButtonCustom variant="contained" color="primary">
-              Ir a carrito
+            <ButtonCustom >
+              Go to cart
             </ButtonCustom>
           </Link>
         ) : (

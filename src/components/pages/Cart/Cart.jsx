@@ -9,11 +9,16 @@ const ButtonCustom = withStyles((theme) => ({
   root: {
     "&.MuiButton-root": {
       textTransform: "none",
-      color: "white",
+      // color: "#3483fa",
       fontSize: "1rem",
-      fontWeight: "500",
+      fontWeight: "600",
       padding: theme.spacing(1),
-      borderRadius: "10px",
+      borderRadius: "8px",
+      // backgroundColor: "#4189e626",
+      margin: theme.spacing(2),
+    },
+    "&.MuiButton-root:hover": {
+      backgroundColor: "#4189e659",
     },
   },
 }))(Button);
@@ -57,7 +62,7 @@ export const Cart = () => {
                 }}
               >
                 <ButtonCustom variant="contained" color="secondary">
-                  Seguir comprando
+                  Keep shopping
                 </ButtonCustom>
               </Link>
             </Grid>
@@ -80,7 +85,7 @@ export const Cart = () => {
                 }}
               >
                 <ButtonCustom variant="contained" color="success">
-                  Hacer pedido
+                  Place an order
                 </ButtonCustom>
               </Link>
             </Grid>
@@ -94,11 +99,11 @@ export const Cart = () => {
               }}
             >
               <ButtonCustom
-                onClick={() => clearCart()}
                 variant="contained"
+                onClick={() => clearCart()}
                 color="error"
               >
-                Vaciar carrito
+                Empty cart
               </ButtonCustom>
             </Grid>
           </Grid>
@@ -111,7 +116,7 @@ export const Cart = () => {
               justifyContent: "center",
             }}
           >
-            No hay items en el carrito
+            No items in the cart
           </Typography>
           <Link
             to={`/`}
@@ -122,9 +127,7 @@ export const Cart = () => {
               alignItems: "center",
             }}
           >
-            <ButtonCustom variant="contained" color="primary">
-              Ir al inicio
-            </ButtonCustom>
+            <ButtonCustom variant="contained" color="primary">Go to Home</ButtonCustom>
           </Link>
         </>
       )}

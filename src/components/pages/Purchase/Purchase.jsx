@@ -21,12 +21,14 @@ export const Purchase = () => {
   const onSubmit = (data) => {
     // console.log(data);
     const Total = totalPrice();
+    const statusOrder = "Generated"
     // console.log(items);
     const newOrder = {
       buyer: data,
       items: cartArray,
       created_at: serverTimestamp(),
       total: Total,
+      status: statusOrder,
     };
     setLoading(true);
     const sendDoc = addDoc(orderCollection, newOrder);
@@ -51,14 +53,14 @@ export const Purchase = () => {
         anchorOrigin={{ vertical: "top", horizontal: "center" }}
         open={openAlert}
         onClose={() => setOpenAlert(false)}
-        message="Orden exitosa"
+        message="Order successfully created"
       >
         <Alert
           onClose={() => setOpenAlert(false)}
           severity="success"
           sx={{ width: "100%" }}
         >
-          Orden creada exitosamente!
+          Order successfully created!
         </Alert>
       </Snackbar>
 
@@ -70,13 +72,20 @@ export const Purchase = () => {
 
           <Grid item xs={12} md={6}>
             {!orderId ? (
-              <Typography variant="h5">{`Total : $ ${totalPrice()}`} </Typography>
+              <Typography variant="h5">
+                {`Total : $ ${totalPrice()}`}{" "}
+              </Typography>
             ) : (
               <></>
             )}
 
             {orderId ? (
-              <Typography variant="h5">{`Su orden se generó con el siguiente ID : ${orderId}`} </Typography>
+              <>
+                <Typography variant="h5">
+                  {`Your order was generated with the following ID : ${orderId}`}{" "}
+                </Typography>
+                <Typography variant="h4">{"Your purchase detail:"} </Typography>
+              </>
             ) : (
               <></>
             )}

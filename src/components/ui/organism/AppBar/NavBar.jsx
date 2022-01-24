@@ -49,7 +49,7 @@ export const NavBar = () => {
     "Men's clothing",
     "Women's clothing",
   ];
-  const settings = ["Perfil", "Configuración", "Cerrar sesión"];
+  const settings = ["orders", "Log Out"];
 
   const handleItem = () => {
     // console.log("Item");
@@ -72,6 +72,7 @@ export const NavBar = () => {
               sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}
             >
               <MenuOption
+                menuButton={"category"}
                 icon={<MenuIcon fontSize="large" />}
                 tooltip={"Items"}
                 items={pages}
@@ -106,6 +107,7 @@ export const NavBar = () => {
                 <CartWidget itemNumber={cartCounter()} />
               </Link>
               <MenuOption
+                menuButton={"account"}
                 icon={<AccountCircleIcon fontSize="large" />}
                 tooltip={"Items"}
                 items={settings}
