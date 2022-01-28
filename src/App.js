@@ -1,15 +1,15 @@
 import React from 'react'
 
 
-import { createTheme } from '@mui/material';
 import { ThemeProvider } from '@mui/styles'
 import { AppRouter } from './routes/AppRouter';
 import { CartProvider } from './context/CartContext';
+import { createTheme } from '@mui/material/styles';
 
 export const theme = createTheme({
 
     typography: {
-        fontFamily: 'IBM Plex Sans',
+        fontFamily: 'Dongle',
 
         h1: {
             fontSize: '2.7rem',

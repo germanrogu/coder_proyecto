@@ -8,6 +8,7 @@ import { ItemDetailContainer } from "../components/ui/molecules/ItemDetailContai
 import { ItemListContainer } from "../components/ui/molecules/ItemListContainer/ItemListContainer";
 import { NavBar } from "../components/ui/organism/AppBar/NavBar";
 import { Footer } from "../components/ui/organism/Footer/Footer";
+import { NotFound } from "../components/ui/organism/NotFound/NotFound";
 
 export const AppRouter = () => {
   return (
@@ -20,6 +21,7 @@ export const AppRouter = () => {
         <Route path="/cart" element={<Cart />} />
         <Route path="/purchase" element={<Purchase />} />
         <Route path="/orders" element={<Orders />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
     </BrowserRouter>

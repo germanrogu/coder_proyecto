@@ -39,10 +39,10 @@ export const ImageGrid = ({ images = [], onSelect, selectedImage }) => {
     <Grid container className={classes.root}>
       <img
         src={images}
-        height={75}
+        height={55}
         alt="images"
         style={{
-          border: "0.5px solid #4169E1",
+          border: "0.8px solid #722f37",
           borderRadius: "10px",
           cursor: "pointer",
         }}

@@ -13,7 +13,7 @@ export const TitleMenu = ({ children, variant }) => {
 
   return (
     <Typography variant={variant} className={classes.title}>
-      {children}
+      {children.charAt(0).toUpperCase() + children.slice(1)}
     </Typography>
   );
 };

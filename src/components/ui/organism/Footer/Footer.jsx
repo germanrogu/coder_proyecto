@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme) => ({
   },
   toolbar: {
     height: "5rem",
-    backgroundColor: "black",
+    backgroundColor: "#722f37",
     paddingTop: theme.spacing(2),
     paddingBottom: theme.spacing(2),
     paddingLeft: theme.spacing(2),
@@ -22,10 +22,10 @@ export const Footer = () => {
   const classes = useStyles();
 
   return (
-    <AppBar position="static" className={classes.root} elevation={1}>
+    <AppBar position="static" className={classes.root} elevation={0}>
       <Toolbar className={classes.toolbar}>
         <Typography variant="body1" color="inherit">
-          Copyright © 2021 eCommerce
+          Copyright © 2021 | Winery - Wine Store
         </Typography>
       </Toolbar>
     </AppBar>

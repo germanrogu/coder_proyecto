@@ -1,0 +1,215 @@
+JSX: es una manera de escribir javacript son otra sintaxis 
+
+const p = document.createElement('p')
+p.innerText = 'Hola mundo'
+
+----------------------------
+
+<p> Hola mundo </p>
+
+function App(){}
+
+App() === <App/>
+
+----------------------------
+
+que es reflow -> en javascript cuando de alguna manera modifica el dom, pasa algo que se llama el reflow 
+
+
+App es todo 
+
+no se pueden retornar dos cossas adyaventes, solo una cosa 
+por eso se necesita el fragment (Contenedor invisible de etiquetas)
+
+
+Componentes son funciones cuya principal funcion es dibujar algo en pantalla entonces todas 
+tienen un retorno y todas arrancan en mayusculas 
+
+Todos los componentes pueden recibir props y los props son de solo lectura. 
+
+
+Cuando se le pasa un parametro a un atributo -> este siempre va a llegar como un objeto de los parametros
+
+Prop -> parametro de una funcion - son los datos que se le pasan a los componentes 
+
+Destructuring -----------------------
+
+const arr = [1,2,3]
+
+Sacar los valores que hay dentro de un array a variables nuevas sueltas 
+
+de manera nueva 
+
+const [uno, dos, tres] = arr
+
+ahora de objetos 
+
+const obj = {uno:1 , dos:2 , tres:3}
+
+si las quiero usar,
+
+la de la izquierda tiene que coincidir con las del objeto-> las de la derecha on las nuevas variables 
+const {uno: uno, dos:dos, tres:tres} = obj 
+
+
+OBJECT PROPERTY SHORTAND 
+
+const nombre = "Horacio"
+
+const persona = {
+    nombre,   //Solo se escribe una vez si se llama lo mismo 
+}
+
+por lo que se puede  hacer 
+const {uno, dos, tres} = obj 
+
+
+-----------------------------------------------------
+
+
+Props: son los parametros que se le pasan a los componentes
+
+Hooks: Funciones->que hacen algo especifico
+
+State: 
+Ciclo de vida:
+
+
+
+----------------------------------------------------------
+
+API -> Dos sistemas (de alguna manera se tienen que comunicar entre si), 
+        para esto existen las API - para establecer la comunicacion
+
+        API REST - el servidor te va a dar distintas url para poder obtner la data 
+                    desde el front . Programa intermedio entre dos sistemas que quieren 
+                    comunicarse 
+
+Ajax -> Async Javascript and XML
+        Sigla que se usa para hacer referencia de la capacidad da javascript de solicitar information
+
+AXIOS : Libreria para hacer peticiones AJAX 
+
+XMLHttpRequest (XHR) -> Pedidos a traves de http -> es un API WEB funciona para hacer peticiones ajax con 
+                        eventos
+
+
+Fetch : API WEB -> funciona para hacer peticiones ajax con Promise 
+
+FPT / WebSocket / SMTP / / Protocolo de transferencia
+HTTP : HyperText Transfer Protocol (Protocolo serie de reglas que tienen que pasar para que algo pase)
+
+
+------------------------- Request / Cliente ------------------------------------------
+
+Que se necesita la maquina cliente para inciar la comunicacion con otra maquina ------
+*url/ip siempre se necesita saber 
+*- metodo/verbos - get/post - Siempre el cliente tiene que mandar - version - http/1.1
+*opcionales -
+*Headers (Herramientas que permiten configurar el pedido de alguna manera) 
+* Accept: application/json, text/plain, application/x-www-form-urlparams (MIME TYPE)
+
+*- Body /Payload (Contenido)
+
+
+
+----------------------- Response / Servidor ------------------------------------------
+
+VERSION - CODIGO - MENSAJE 
+
+CODIGOS: 101 - 404(Not found) - 200(OK) - 201(CREATED) - 
+        - 500(Errores del servidor - Internal server error) - 405 - 304(Not modified)
+        400 (Bad request) - 504 (Gateway Timeout) - 401/403 (Forbidden / Unauthorized)
+
+Headers 
+    Content-Type : application/json
+    Content-Lenght : Longitud del contenido 
+    access-control-allow-origin : Establece quien tiene permisos para usar el recuros 
+
+CORS : Cross Origin Resource Sharing 
+
+Body: contenido
+
+--------------------------------------------------------------------------------------
+
+REST -> Representational State Transfer 
+
+
+--------------------------------------------------------------------------------------
+con el Async transformas la funcion en una promesa, ahora se podria utilizar el try catch
+await tiene que ir adelante de una promesa y tiene que ser usado adentro de una funcion async
+
+
+--------------------------------------------------------------------------------------
+
+Par Router -> se hace con la libreria de enrutamiento que nos permite renderizar los distintos Componentes sin 
+tener que hacer la carga todo el tiempo, solo le cambiamos el contenido dinamicamente con las rutas.
+
+Con react-router-doom version 6.2.1
+
+NavLink y Link es lo mismo etiquetas de link 
+Link 
+
+Hook de useParams trae la variable variable de la ruta para saber donde estoy parado con las rutas
+
+--------------------------------------------------------------------------------------
+
+Event = 
+
+Callback de manera anonima -> estoy diciendo que no se va a ejecutar automaticamente cuando haga click 
+onClick(()=>onAdd(counter))
+
+
+--------------------------------------------------------------------------------------
+
+API de context para tener la informacion que necesitemos distribuir en algunos componentes como tener la 
+informacion global 
+Context -> estado para que mantenga alugna propiedad en todos los componentes, 
+o toda la aplicacion, para mantener el carrito de compras 
+
+Provider - Consumer 
+Provider: Que el contexto sea dinámico , proveer el contexto y modificarlo
+El consumer no se usa por la manera en que se llamaba -> era para consumir el contexto
+
+useContext() : Hooks que te permite consumir el contexto
+
+Redux 
+
+-----------------------------------------------------------------------------------------
+FIREBASE plataforma que tiene el servicio de bases de datos 
+
+Proyecto -> Nos da acceso a una instancia de cada servicio
+
+Firestore -> Servicio de base de datos no relacional de firebase
+Base de datos - lugar donde se puede almacenar informacion, tiene que pasar determinadas cosas
+                Programa servidores (PC - puertos abiertos)
+                Los lenguajes de bases de datos - se separan en dos grupos --------------
+
+Relacional (SQL) 
+organizar la informacion en entidades con determinadas caracteristicas tienen relaciones, un campo de una tabla 
+se relaciona con otro campo de otra tabla.
+
+
+No relacionales (NoSQL / Not only SQL)
+Escalan mucho mas rapido  -  Se puede guardar la informacion casi suelta. La informacion se guarda en collecciones
+Collection de informacion - documentos (Las filas o registros de una relacional) - Propiedades (Columnas de una tabla)
+
+MongoDB / Cassandra / CouchDB / Redis...
+
+
+App -> en el proyecto configurar las apps - lo que nos da acceso externo al consumo de servicios de nuestro proyecto
+
+SDK -> Instalar la libreria de firebase en nuestro proyecto para poder ejecutarlo (código)
+
+
+getDocs para no filtrar getDocs(collection)
+ dentro de toda la coleleciton 
+
+
+
+
+
+
+
+
+

@@ -22,24 +22,50 @@ const ButtonCustom = withStyles((theme) => ({
 
 export const CartItem = ({
   product: {
-    product: { id, title, image, category, price },
+    product: { id, title, image, price },
     quantity,
   },
   deleteItem,
 }) => {
   return (
-    <Grid container spacing={3} sx={{ borderBottom: "1px solid #48484826" }}>
+    <Grid
+      container
+      spacing={3}
+      sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+    >
       <Grid item xs={1} md={1}>
-        <img height={75} src={image} alt={title} />
+        <img height={65} src={image} alt={title} />
       </Grid>
       <Grid item xs={3} md={3}>
-        <Typography variant="h6">{title}</Typography>
+        <Typography
+          style={{
+            fontWeight: "600",
+            color: "#722f37",
+          }}
+          variant="subtitle1"
+        >
+          {title}
+        </Typography>
       </Grid>
       <Grid item xs={3} md={1}>
-        <Typography variant="subtitle1">{"$" + price}</Typography>
+        <Typography
+          style={{
+            fontWeight: "600",
+          }}
+          variant="subtitle1"
+        >
+          {"$" + price}
+        </Typography>
       </Grid>
       <Grid item xs={3} md={1}>
-        <Typography variant="subtitle1">{quantity}</Typography>
+        <Typography
+          style={{
+            fontWeight: "600",
+          }}
+          variant="subtitle1"
+        >
+          {quantity}
+        </Typography>
       </Grid>
       <Grid item xs={3} md={3}>
         <ButtonCustom onClick={() => deleteItem(id)}>Delete</ButtonCustom>

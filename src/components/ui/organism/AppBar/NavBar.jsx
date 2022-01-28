@@ -1,12 +1,12 @@
 import React, { useContext } from "react";
-import { AppBar, CssBaseline, Grid, Toolbar, Button } from "@mui/material";
+import { AppBar, CssBaseline, Grid, Toolbar, Typography } from "@mui/material";
 
 import { NavLogo } from "../../atoms/NavLogo/NavLogo";
 import logo from "../../../../img/comercio-electronico.png";
 import MenuIcon from "@mui/icons-material/Menu";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { MenuOption } from "../../molecules/MenuOption/MenuOption";
-import { makeStyles, withStyles } from "@mui/styles";
+import { makeStyles } from "@mui/styles";
 import { CartWidget } from "../../atoms/CartWidget/CartWidget";
 import { Link } from "react-router-dom";
 import { CartContext } from "../../../../context/CartContext";
@@ -14,30 +14,40 @@ import { CartContext } from "../../../../context/CartContext";
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
+    height: "5rem",
   },
   toolbar: {
     height: "5rem",
-    backgroundColor: "black",
+    backgroundColor: "#722f37",
     paddingTop: theme.spacing(2),
     paddingBottom: theme.spacing(2),
-    paddingLeft: theme.spacing(2),
-    paddingRight: theme.spacing(2),
+    paddingLeft: theme.spacing(1),
+    paddingRight: theme.spacing(1),
+
+    "@media (min-width:1280px)": {
+      paddingTop: theme.spacing(2),
+      paddingBottom: theme.spacing(2),
+      paddingLeft: theme.spacing(10),
+      paddingRight: theme.spacing(10),
+    },
+    "@media (min-width:1440px)": {
+      paddingTop: theme.spacing(2),
+      paddingBottom: theme.spacing(2),
+      paddingLeft: theme.spacing(10),
+      paddingRight: theme.spacing(10),
+    },
+    "@media (min-width:1670px)": {
+      paddingTop: theme.spacing(2),
+      paddingBottom: theme.spacing(2),
+      paddingLeft: theme.spacing(10),
+      paddingRight: theme.spacing(10),
+    },
   },
   ini: {
     display: "flex",
     alignItems: "center",
   },
 }));
-
-const ButtonCustom = withStyles((theme) => ({
-  root: {
-    "&.MuiButton-root": {
-      textTransform: "none",
-      color: "white",
-      fontSize: "1rem",
-    },
-  },
-}))(Button);
 
 export const NavBar = () => {
   const classes = useStyles();
@@ -51,15 +61,11 @@ export const NavBar = () => {
   ];
   const settings = ["orders", "Log Out"];
 
-  const handleItem = () => {
-    // console.log("Item");
-  };
-
   return (
     <>
       <CssBaseline />
 
-      <AppBar position="static" className={classes.root} elevation={1}>
+      <AppBar position="static" className={classes.root} elevation={0}>
         <Toolbar disableGutters className={classes.toolbar}>
           <Grid container>
             <Grid item xs={2} className={classes.ini}>
@@ -69,12 +75,16 @@ export const NavBar = () => {
             <Grid
               item
               xs={5}
-              sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}
+              sx={{
+                flexGrow: 1,
+                display: { xs: "flex", md: "none" },
+                paddingLeft: "1.5rem",
+              }}
             >
               <MenuOption
                 menuButton={"category"}
                 icon={<MenuIcon fontSize="large" />}
-                tooltip={"Items"}
+                tooltip={"Categories"}
                 items={pages}
               />
             </Grid>
@@ -82,7 +92,12 @@ export const NavBar = () => {
             <Grid
               item
               xs={5}
-              sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}
+              sx={{
+                flexGrow: 1,
+                display: { xs: "none", md: "flex" },
+                justifyContent: "center",
+                alignItems: "center",
+              }}
             >
               {pages.map((page) => (
                 <Link
@@ -90,7 +105,15 @@ export const NavBar = () => {
                   style={{ display: "flex", textDecoration: "none" }}
                   key={page}
                 >
-                  <ButtonCustom onClick={handleItem}>{page}</ButtonCustom>
+                  <Typography
+                    sx={{
+                      textDecoration: "none",
+                      color: "white",
+                      paddingRight: "1.3rem",
+                    }}
+                  >
+                    {page}
+                  </Typography>
                 </Link>
               ))}
             </Grid>
@@ -109,7 +132,7 @@ export const NavBar = () => {
               <MenuOption
                 menuButton={"account"}
                 icon={<AccountCircleIcon fontSize="large" />}
-                tooltip={"Items"}
+                tooltip={"Account"}
                 items={settings}
               />
             </Grid>

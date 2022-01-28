@@ -5,7 +5,6 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 export const CartWidget = ({ itemNumber }) => {
   // eslint-disable-next-line no-unused-vars
   const [anchorEl, setAnchorEl] = useState(null);
-  //const openAccount = Boolean(anchorEl);
 
   /**
    * Open main menu
@@ -15,10 +14,6 @@ export const CartWidget = ({ itemNumber }) => {
     setAnchorEl(event.currentTarget);
   };
 
-  //   const handleClose = () => {
-  //     setAnchorEl(null);
-  //   };
-
   return (
     <Tooltip title={"Carrito"}>
       <IconButton
@@ -27,7 +22,16 @@ export const CartWidget = ({ itemNumber }) => {
         aria-haspopup="true"
         onClick={handleMenu}
       >
-        <Badge badgeContent={itemNumber} color="secondary">
+        <Badge
+          sx={{
+            "& .MuiBadge-badge": {
+              color: "white",
+              backgroundColor: "#E72D",
+            },
+          }}
+          badgeContent={itemNumber}
+          color="secondary"
+        >
           <ShoppingCartIcon fontSize="large" style={{ color: "white" }} />
         </Badge>
       </IconButton>

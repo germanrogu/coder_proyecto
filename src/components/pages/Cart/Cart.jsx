@@ -1,9 +1,21 @@
 import React, { useContext } from "react";
 import { CartContext } from "../../../context/CartContext";
-import { Button, Grid, Typography } from "@mui/material";
+import { Button, Divider, Grid, Typography } from "@mui/material";
 import { CartItem } from "../../ui/atoms/CartItem/CartItem";
 import { Link } from "react-router-dom";
-import { withStyles } from "@mui/styles";
+import { makeStyles, withStyles } from "@mui/styles";
+import { ContentPages } from "../../ui/atoms/ContentPages/ContentPages";
+
+const useStyles = makeStyles((theme) => ({
+  container: {
+    maxWidth: "85%",
+    paddingBottom: theme.spacing(8),
+
+    "@media (min-width:1280px)": { maxWidth: "85%" },
+    "@media (min-width:1440px)": { maxWidth: "75%" },
+    "@media (min-width:1670px)": { maxWidth: "65%" },
+  },
+}));
 
 const ButtonCustom = withStyles((theme) => ({
   root: {
@@ -24,17 +36,40 @@ const ButtonCustom = withStyles((theme) => ({
 }))(Button);
 
 export const Cart = () => {
+  const classes = useStyles();
+
   const { cartArray, deleteItem, totalPrice, clearCart } =
     useContext(CartContext);
 
   return (
-    <>
+    <ContentPages>
+      <Typography
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          fontSize: "1.8rem",
+          fontWeight: "600",
+          color: "#722f37",
+          paddingTop: "1.3rem",
+          paddingBottom: "1.5rem",
+          fontFamily: "Marck Script",
+        }}
+      >
+        {" Shopping cart "}
+      </Typography>
+
       {cartArray.length !== 0 ? (
         <>
-          <Grid container spacing={1}>
+          <Grid
+            container
+            spacing={1}
+            sx={{ display: "flex", justifyContent: "center", margin: "auto" }}
+            className={classes.container}
+          >
             {cartArray.map((item) => (
               <Grid item xs={12} md={12} key={item.product.id}>
                 <CartItem product={item} deleteItem={deleteItem} />
+                <Divider />
               </Grid>
             ))}
             <Grid item xs={12} md={6}>
@@ -127,10 +162,12 @@ export const Cart = () => {
               alignItems: "center",
             }}
           >
-            <ButtonCustom variant="contained" color="primary">Go to Home</ButtonCustom>
+            <ButtonCustom variant="contained" color="primary">
+              Go to Home
+            </ButtonCustom>
           </Link>
         </>
       )}
-    </>
+    </ContentPages>
   );
 };

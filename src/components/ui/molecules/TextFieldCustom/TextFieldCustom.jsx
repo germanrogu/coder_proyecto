@@ -43,10 +43,6 @@ export const TextFieldCustom = ({ onSubmit }) => {
   const classes = useStyles();
   const { handleSubmit, control } = useForm();
 
-  // const onSubmit = (data) => {
-  //   console.log(data);
-  // };
-
   return (
     <>
       <form className={classes.root} onSubmit={handleSubmit(onSubmit)}>
