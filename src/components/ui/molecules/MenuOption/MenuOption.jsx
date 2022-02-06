@@ -3,7 +3,7 @@ import { IconButton, Tooltip } from "@mui/material";
 
 import { MenuNav } from "../../atoms/MenuNav/MenuNav";
 
-export const MenuOption = ({ icon, tooltip, items }) => {
+export const MenuOption = ({ icon, tooltip, items, menuButton }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const openAccount = Boolean(anchorEl);
 
@@ -35,6 +35,7 @@ export const MenuOption = ({ icon, tooltip, items }) => {
       </Tooltip>
 
       <MenuNav
+        menuButton={menuButton}
         anchorEl={anchorEl}
         open={openAccount}
         onClose={handleClose}

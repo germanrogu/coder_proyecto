@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   size: {
-    maxWidth: 60,
+    maxWidth: 100,
   },
 }));
 

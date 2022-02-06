@@ -5,6 +5,7 @@ import React from "react";
 const styles = makeStyles((theme) => ({
   title: {
     fontWeight: "bold",
+    color: "#722f37",
   },
 }));
 
@@ -13,7 +14,7 @@ export const TitleMenu = ({ children, variant }) => {
 
   return (
     <Typography variant={variant} className={classes.title}>
-      {children}
+      {children.charAt(0).toUpperCase() + children.slice(1)}
     </Typography>
   );
 };
