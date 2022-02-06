@@ -11,7 +11,6 @@ export const ItemList = ({ items, onAdd }) => {
           <Grid item xs={12} md={3} key={item.id}>
             <Item
               id={item.id}
-              //stock={item.stockNumber}
               stock={10}
               initial={1}
               onAdd={onAdd}

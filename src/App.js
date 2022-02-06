@@ -1,14 +1,16 @@
 import React from 'react'
 
 
-import { createTheme } from '@mui/material';
 import { ThemeProvider } from '@mui/styles'
 import { AppRouter } from './routes/AppRouter';
+import { CartProvider } from './context/CartContext';
+import { createTheme } from '@mui/material/styles';
+import { AuthContextProvider } from './context/AuthContext';
 
 export const theme = createTheme({
 
     typography: {
-        fontFamily: 'IBM Plex Sans',
+        fontFamily: 'Dongle',
 
         h1: {
             fontSize: '2.7rem',
@@ -51,9 +53,14 @@ export const theme = createTheme({
 
 export const App = () => {
     return (
-        <ThemeProvider theme={theme}>
-            <AppRouter />
-        </ThemeProvider>
+        <AuthContextProvider>
+            <CartProvider>
+                <ThemeProvider theme={theme}>
+                    <AppRouter />
+                </ThemeProvider>
+            </CartProvider>
+        </AuthContextProvider>
+
 
     )
 }

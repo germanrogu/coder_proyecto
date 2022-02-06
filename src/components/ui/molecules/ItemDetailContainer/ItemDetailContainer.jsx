@@ -1,72 +1,101 @@
-import { Box, CircularProgress } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import { Box, Typography } from "@mui/material";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-// import image1 from "../../../../img/1.png";
-// import image2 from "../../../../img/2.png";
-// import image3 from "../../../../img/3.png";
+import { CartContext } from "../../../../context/CartContext";
+import { db } from "../../../../firebase";
+import { LoadingScreen } from "../../atoms/LoadingScreen/LoadingScreen";
 import { ItemDetail } from "../../molecules/ItemDetail/ItemDetail";
+import { collection, where, getDocs, query } from "firebase/firestore";
+import { NotFound } from "../../organism/NotFound/NotFound";
+import { ContentPages } from "../../atoms/ContentPages/ContentPages";
+import { useAuth } from "../../../../context/AuthContext";
+import Swal from "sweetalert2";
 
 export const ItemDetailContainer = () => {
   const [product, setProduct] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [added, setAdded] = useState(false);
   const { id } = useParams();
-  // const item = {
-  //   id: 2,
-  //   titleItem: "GIFTPACK TANQUERAY",
-  //   category: "Whisky",
-  //   description:
-  //     "La Ginebra Tanqueray es una de las Ginebras más apreciadas y apetecidas por el público local e internacional. La Tanqueray London Dry Gin, se ha mantenido en el mercado hasta la actualidad conservando su originalidad y calidad Premium, y hoy muestra su presentación de 375ml en un GiftPack que disfrutarás al máximo.",
-  //   price: 70.5,
-  //   stockNumber: 10,
-  //   images: [image1, image2, image3],
-  // };
-
-  // useEffect(() => {
-  //   setLoading(true);
-
-  //   const promise = new Promise((res, rej) => {
-  //     setTimeout(() => {
-  //       res(item);
-  //     }, 2000);
-  //   });
-
-  //   promise.then((items) => {
-  //     setProduct(items);
-  //     setLoading(false);
-  //   });
-  //   promise.catch((error) => {
-  //     console.log(error);
-  //   });
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
+  const { addToCart } = useContext(CartContext);
+  const { currentUser } = useAuth();
 
   useEffect(() => {
     setLoading(true);
 
-    const getProducts = fetch(`https://fakestoreapi.com/products/${id}`);
+    const productsCollection = collection(db, "productos");
+    const filter = where("id", "==", Number(id));
+    const consult = query(productsCollection, filter);
 
-    getProducts
-      .then((response) => response.json())
-      .then((items) => {
-        setProduct(items);
+    const getDocuments = getDocs(consult);
+    getDocuments
+      .then((response) => {
+        const docs = response.docs;
+        const docsFormat = docs.map((doc) => {
+          return doc.data();
+        });
+        const result = docsFormat.find((element) => element.id === Number(id));
+        setProduct(result);
         setLoading(false);
       })
-      .catch((err) => {
-        console.error(err);
+      .catch((error) => {
+        Swal.fire({
+          position: "center",
+          icon: "error",
+          title: "Something went wrong!",
+          text: `${error.message}`,
+          showConfirmButton: true,
+          confirmButtonColor: "#722f37",
+        });
+        setLoading(false);
       });
   }, [id]);
 
-  const onAdd = () => {};
+  const onAdd = (count) => {
+    if (currentUser) {
+      addToCart(product, count);
+      setAdded(true);
+    } else {
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Something went wrong!",
+        text: "To buy, log in to your account",
+        showConfirmButton: true,
+        confirmButtonColor: "#722f37",
+      });
+    }
+  };
 
   return (
-    <div>
-      {!loading ? (
-        <ItemDetail product={product} onAdd={onAdd} />
+    <ContentPages>
+      <Typography
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          fontSize: "1.8rem",
+          fontWeight: "600",
+          color: "#722f37",
+          paddingTop: "1.3rem",
+          paddingBottom: "1.5rem",
+          fontFamily: "Marck Script",
+        }}
+      >
+        {" Product details "}
+      </Typography>
+
+      {!product ? (
+        <NotFound />
       ) : (
-        <Box sx={{ display: "flex" }}>
-          <CircularProgress />
-        </Box>
+        <>
+          {!loading ? (
+            <ItemDetail product={product} onAdd={onAdd} added={added} />
+          ) : (
+            <Box sx={{ display: "flex" }}>
+              <LoadingScreen />
+            </Box>
+          )}
+        </>
       )}
-    </div>
+    </ContentPages>
   );
 };

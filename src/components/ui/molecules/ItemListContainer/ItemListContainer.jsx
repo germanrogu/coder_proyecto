@@ -1,86 +1,39 @@
 import React, { useEffect, useState } from "react";
-import { Box, CircularProgress, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { ItemList } from "../ItemList/ItemList";
-// import macallan from "../../../../img/macallan.png";
-// import monkey from "../../../../img/monkey.png";
 import { useParams } from "react-router-dom";
+import { LoadingScreen } from "../../atoms/LoadingScreen/LoadingScreen";
+import { db } from "../../../../firebase";
+import { collection, getDocs, query, where } from "firebase/firestore";
+import { ContentPages } from "../../atoms/ContentPages/ContentPages";
 
-export const ItemListContainer = ({ greeting }) => {
+export const ItemListContainer = ({ greeting = "Welcome" }) => {
   const [product, setProduct] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  // const items = [
-  //   {
-  //     id: 1,
-  //     titleItem: "MACALLAN 18 AÑOS ",
-  //     productName: "Whisky",
-  //     description:
-  //       "Macallan Double Cask es perfectamente equilibrado gracias a su maduración en barricas de roble sazonadas con jerez americano y europeo, durante 18 años.",
-  //     urlImg: macallan,
-  //     stockNumber: 8,
-  //   },
-  //   {
-  //     id: 2,
-  //     titleItem: "MONKEY SHOULDER",
-  //     productName: "Whisky",
-  //     description:
-  //       "Whisky Monkey Shoulder, es un magnífico whisky Blended Malt de William Grant, hecho con maltas singulares de tres famosas destilerías de Speyside. Cuyo resultado es un whisky escocés suave, cremoso y suave que funciona perfectamente bien, sobre hielo o en cócteles de whisky (donde realmente sobresale).",
-  //     urlImg: monkey,
-  //     stockNumber: 10,
-  //   },
-  //   {
-  //     id: 3,
-  //     titleItem: "MONKEY SHOULDER",
-  //     productName: "Whisky",
-  //     description:
-  //       "Whisky Monkey Shoulder, es un magnífico whisky Blended Malt de William Grant, hecho con maltas singulares de tres famosas destilerías de Speyside. Cuyo resultado es un whisky escocés suave, cremoso y suave que funciona perfectamente bien, sobre hielo o en cócteles de whisky (donde realmente sobresale).",
-  //     urlImg: monkey,
-  //     stockNumber: 10,
-  //   },
-  //   {
-  //     id: 4,
-  //     titleItem: "MACALLAN 18 AÑOS ",
-  //     productName: "Whisky",
-  //     description:
-  //       "Macallan Double Cask es perfectamente equilibrado gracias a su maduración en barricas de roble sazonadas con jerez americano y europeo, durante 18 años.",
-  //     urlImg: macallan,
-  //     stockNumber: 8,
-  //   },
-  // ];
-
   const { id } = useParams();
-
-  // useEffect(() => {
-  //   setLoading(true);
-  //   const promise = new Promise((res, rej) => {
-  //     setTimeout(() => {
-  //       res(items);
-  //     }, 2000);
-  //   });
-
-  //   promise.then((items) => {
-  //     setProduct(items);
-  //     setLoading(false);
-  //   });
-  //   promise.catch((error) => {
-  //     console.log(error);
-  //   });
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
 
   useEffect(() => {
     setLoading(true);
 
-    const getProducts = id
-      ? fetch(`https://fakestoreapi.com/products/category/${id.toLowerCase()}`)
-      : fetch("https://fakestoreapi.com/products");
+    const productsCollection = collection(db, "productos");
+    const getDocuments = id
+      ? getDocs(
+          query(
+            productsCollection,
+            where("category", "==", id.toLowerCase() || " ")
+          )
+        )
+      : getDocs(productsCollection);
 
-    getProducts
-      .then((response) => response.json())
-      .then((products) => {
-        setProduct(products);
+    getDocuments
+      .then((response) => {
+        const docs = response.docs;
+        const docsFormat = docs.map((doc) => {
+          return doc.data();
+        });
+        setProduct(docsFormat);
         setLoading(false);
-        
       })
       .catch((err) => {
         console.error(err);
@@ -90,16 +43,29 @@ export const ItemListContainer = ({ greeting }) => {
   const onAdd = () => {};
 
   return (
-    <div style={{ padding: "2rem" }}>
-      <Typography>{greeting}</Typography>
+    <ContentPages>
+      <Typography
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          fontSize: "1.8rem",
+          fontWeight: "600",
+          color: "#722f37",
+          paddingTop: "1.3rem",
+          paddingBottom: "1.3rem",
+          fontFamily: 'Marck Script',
+        }}
+      >
+         {id ? "Welcome, to " + id : greeting}
+      </Typography>
 
       {!loading ? (
         <ItemList items={product} onAdd={onAdd} />
       ) : (
         <Box sx={{ display: "flex" }}>
-          <CircularProgress />
+          <LoadingScreen />
         </Box>
       )}
-    </div>
+    </ContentPages>
   );
 };

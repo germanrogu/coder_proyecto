@@ -1,17 +1,15 @@
 import {
+  alpha,
   Button,
   Card,
   CardActions,
-  // CardContent,
   CardHeader,
   CardMedia,
   IconButton,
-  // Typography,
 } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import React from "react";
 import { withStyles } from "@mui/styles";
-import { ItemCount } from "../../molecules/ItemCount/ItemCount";
 import { Link } from "react-router-dom";
 
 const CardCustom = withStyles((theme) => ({
@@ -19,7 +17,6 @@ const CardCustom = withStyles((theme) => ({
     textAlign: "center",
     "&.MuiCard-root": {
       margin: "1.6rem",
-      borderRadius: "10px",
     },
   },
 }))(Card);
@@ -28,35 +25,52 @@ const ButtonCustom = withStyles((theme) => ({
   root: {
     "&.MuiButton-root": {
       textTransform: "none",
-      color: "black",
-      fontSize: "1rem",
-      fontWeight: "400",
+      color: "#722f37",
+      fontSize: "0.9rem",
+      fontWeight: "600",
       padding: theme.spacing(1),
-      borderRadius: "10px",
+      borderRadius: "8px",
+      backgroundColor: alpha("#722f37", 0.2),
     },
     "&.MuiButton-root:hover": {
-      backgroundColor: "#C1D1D6",
+      backgroundColor: alpha("#722f37", 0.8),
+      color: "white",
     },
   },
 }))(Button);
 
-export const Item = ({
-  id,
-  stock,
-  initial,
-  onAdd,
-  titleItem,
-  category,
-  // description,
-  urlImg,
-  //stockNumber,
-}) => {
+export const Item = ({ id, stock, titleItem, category, urlImg }) => {
+  let titleCustom = titleItem.toLowerCase();
+  let titleCustom2 = titleCustom.charAt(0).toUpperCase() + titleItem.slice(1);
+
   return (
     <>
       <CardCustom>
         <CardHeader
-          title={titleItem}
-          subheader={category + " - Stock: " + stock}
+          sx={{
+            display: "flex",
+            overflow: "hidden",
+            "& .MuiCardHeader-content": {
+              overflow: "hidden",
+            },
+          }}
+          titleTypographyProps={{
+            variant: "subtitle1",
+            fontWeight: "600",
+            color: "#722f37",
+            noWrap: true
+          }}
+          title={titleCustom2}
+          subheader={
+            category.charAt(0).toUpperCase() +
+            category.slice(1) +
+            " - Stock: " +
+            stock
+          }
+          subheaderTypographyProps={{
+            variant: "body2",
+            noWrap: true
+          }}
           action={
             <IconButton aria-label="add to favorites">
               <FavoriteIcon />
@@ -65,18 +79,12 @@ export const Item = ({
         />
         <CardMedia
           component="img"
-          height="150"
+          height="130"
           image={urlImg}
-          alt="Paella dish"
+          alt={titleItem}
           sx={{ objectFit: "contain" }}
         />
-        {/* <CardContent>
-          <Typography variant="body2" color="text.secondary">
-            {description.length > 120
-              ? description.substring(0, 120 - 3) + " ..."
-              : description}
-          </Typography>
-        </CardContent> */}
+
         <CardActions
           disableSpacing
           sx={{ display: "flex", justifyContent: "center" }}
@@ -85,10 +93,9 @@ export const Item = ({
             to={`/item/${id}`}
             style={{ display: "flex", textDecoration: "none" }}
           >
-            <ButtonCustom>Más información</ButtonCustom>
+            <ButtonCustom> Detail </ButtonCustom>
           </Link>
         </CardActions>
-        <ItemCount stock={stock} initial={initial} onAdd={onAdd} />
       </CardCustom>
     </>
   );

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, ButtonGroup } from "@mui/material";
+import { alpha, Button, ButtonGroup } from "@mui/material";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import { withStyles } from "@mui/styles";
@@ -7,17 +7,18 @@ import { withStyles } from "@mui/styles";
 const ButtonCustom = withStyles((theme) => ({
   root: {
     "&.MuiButton-root": {
-      backgroundColor: "#1976d2",
       textTransform: "none",
-      color: "white",
+      color: "#722f37",
       fontSize: "1rem",
       fontWeight: "600",
       padding: theme.spacing(1),
-      borderRadius: "10px",
+      borderRadius: "8px",
+      backgroundColor: alpha("#722f37", 0.2),
       margin: theme.spacing(2),
     },
     "&.MuiButton-root:hover": {
-      backgroundColor: "#074b8f",
+      backgroundColor: alpha("#722f37", 0.8),
+      color: "white",
     },
   },
 }))(Button);
@@ -33,13 +34,6 @@ export const ItemCount = ({ stock = 10, initial = 1, onAdd }) => {
     setCounter(Math.max(counter - 1, 1));
   };
 
-  const onAddElements = () => {
-    if (counter <= stock) {
-    }
-    //onAdd(counter)
-    console.log("Cantidad confirmada: " + counter);
-  };
-
   return (
     <div
       style={{
@@ -49,20 +43,24 @@ export const ItemCount = ({ stock = 10, initial = 1, onAdd }) => {
       }}
     >
       <ButtonGroup variant="outlined" aria-label="outlined button group">
-        <Button onClick={removeElement}>
-          <RemoveCircleOutlineIcon />
+        <Button onClick={removeElement} sx={{ borderColor: "#722f37" }}>
+          <RemoveCircleOutlineIcon sx={{ color: "#722f37" }} />
         </Button>
-        
-        <Button variant="outlined" disabled>
+
+        <Button
+          variant="outlined"
+          disabled
+          sx={{ color: "#722f37", fontWeight: "600" }}
+        >
           {counter}
         </Button>
 
-        <Button onClick={addElement}>
-          <AddCircleOutlineIcon />
+        <Button onClick={addElement} sx={{ borderColor: "#722f37" }}>
+          <AddCircleOutlineIcon sx={{ color: "#722f37" }} />
         </Button>
       </ButtonGroup>
 
-      <ButtonCustom onClick={onAddElements}>Agregar al carrito</ButtonCustom>
+      <ButtonCustom onClick={() => onAdd(counter)}>Add to cart</ButtonCustom>
     </div>
   );
 };
