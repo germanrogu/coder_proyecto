@@ -1,7 +1,7 @@
 <h1 align="center"> Winery - Wine Store</h1>
 <hr class="solid">
 
-![image](https://github.com/germanrogu/coder_proyecto/tree/dev/src/img/Video_Trim.gif)
+![Video_Trim](https://github.com/germanrogu/coder_proyecto/tree/dev/src/img/Video_Trim.gif)
  
 
 
