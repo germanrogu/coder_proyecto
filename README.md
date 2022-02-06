@@ -1,8 +1,12 @@
-
+<h1 align="center"> Winery - Wine Store</h1>
+<hr class="solid">
+<p align="center"><iframe src="https://giphy.com/embed/8LZABLjF0aw6tLzkG8" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/8LZABLjF0aw6tLzkG8"></a></p></p> 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-This is the final project of the React JS course for CoderHouse.
+This is the final project of the React JS course for CoderHouse. 
+It is a wine business, where you can log in and register using firebase.
+You can see each product in detail, place orders and review the orders made.
 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
@@ -11,8 +15,9 @@ This is the final project of the React JS course for CoderHouse.
 
 ### Built With
 
-* [React.js](https://reactjs.org/)
-* [Material UI](https://mui.com/)
+* [React.js](https://reactjs.org/) - JavaScript library for building user interfaces
+* [Material UI](https://mui.com/) - React UI library
+![Firebase](https://img.shields.io/badge/firebase-%23039BE5.svg?style=for-the-badge&logo=firebase)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -35,8 +40,10 @@ This is the final project of the React JS course for CoderHouse.
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
+## Firebase Deploy:
+You can visit it by clicking on the following link
+### [Winery](https://coderhouse-proyecto.web.app/)
 
-<!-- USAGE EXAMPLES -->
 ## Usage
 
 ### `npm start`
