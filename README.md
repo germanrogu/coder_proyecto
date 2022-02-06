@@ -1,5 +1,6 @@
 <h1 align="center"> Winery - Wine Store</h1>
 <hr class="solid">
+
 ![image](https://giphy.com/embed/8LZABLjF0aw6tLzkG8)
  
 
