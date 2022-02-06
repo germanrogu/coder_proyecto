@@ -1,6 +1,8 @@
 <h1 align="center"> Winery - Wine Store</h1>
 <hr class="solid">
-<p align="center"><img src="https://giphy.com/embed/8LZABLjF0aw6tLzkG8" width="480" height="270"></img></p> 
+<p align="center"><img src="https://giphy.com/embed/8LZABLjF0aw6tLzkG8" width="480" height="270"></p> 
+
+
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
@@ -17,7 +19,8 @@ You can see each product in detail, place orders and review the orders made.
 
 * [React.js](https://reactjs.org/) - JavaScript library for building user interfaces
 * [Material UI](https://mui.com/) - React UI library
-![Firebase](https://img.shields.io/badge/firebase-%23039BE5.svg?style=for-the-badge&logo=firebase)
+
+* ![Firebase](https://img.shields.io/badge/firebase-%23039BE5.svg?style=for-the-badge&logo=firebase)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
