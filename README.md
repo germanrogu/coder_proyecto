@@ -1,6 +1,6 @@
 <h1 align="center"> Winery - Wine Store</h1>
 <hr class="solid">
-<p align="center"><iframe src="https://giphy.com/embed/8LZABLjF0aw6tLzkG8" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/8LZABLjF0aw6tLzkG8"></a></p></p> 
+<p align="center"><img src="https://giphy.com/embed/8LZABLjF0aw6tLzkG8" width="480" height="270"></img></p> 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
