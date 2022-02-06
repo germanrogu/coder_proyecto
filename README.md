@@ -1,6 +1,7 @@
 <h1 align="center"> Winery - Wine Store</h1>
 <hr class="solid">
-<p align="center"><img src="https://giphy.com/embed/8LZABLjF0aw6tLzkG8" width="480" height="270"></p> 
+![image](https://giphy.com/embed/8LZABLjF0aw6tLzkG8)
+ 
 
 
 <!-- ABOUT THE PROJECT -->
