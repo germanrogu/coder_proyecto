@@ -5,6 +5,7 @@ import React from "react";
 const styles = makeStyles((theme) => ({
   title: {
     fontWeight: "bold",
+    color: "#722f37",
   },
 }));
 

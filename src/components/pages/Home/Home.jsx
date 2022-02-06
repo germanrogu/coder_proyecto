@@ -3,6 +3,8 @@ import { ItemListContainer } from "../../ui/molecules/ItemListContainer/ItemList
 
 export const Home = () => {
   return (
-        <ItemListContainer greeting={"Welcome to Winery, we love having you here"}/>
+    <ItemListContainer
+      greeting={"Welcome to Winery, we love having you here"}
+    />
   );
 };

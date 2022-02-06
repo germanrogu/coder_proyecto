@@ -30,7 +30,7 @@ export const MenuNav = ({ anchorEl, open, onClose, items, menuButton }) => {
       {menuButton === "category"
         ? items.map((item) => (
             <Link
-              to={`/categoria/${item}`}
+              to={`/category/${item}`}
               style={{
                 display: "flex",
                 textDecoration: "none",
@@ -39,7 +39,11 @@ export const MenuNav = ({ anchorEl, open, onClose, items, menuButton }) => {
               key={item}
             >
               <MenuItem key={item} onClick={onClose}>
-                <TitleMenu textAlign="center" children={item} variant={"subtitle1"} />
+                <TitleMenu
+                  textAlign="center"
+                  children={item}
+                  variant={"subtitle1"}
+                />
               </MenuItem>
             </Link>
           ))
@@ -54,7 +58,11 @@ export const MenuNav = ({ anchorEl, open, onClose, items, menuButton }) => {
               key={item}
             >
               <MenuItem key={item} onClick={onClose}>
-                <TitleMenu textAlign="center" children={item} variant={"subtitle1"} />
+                <TitleMenu
+                  textAlign="center"
+                  children={item}
+                  variant={"subtitle1"}
+                />
               </MenuItem>
             </Link>
           ))}

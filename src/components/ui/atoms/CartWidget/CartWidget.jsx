@@ -15,7 +15,7 @@ export const CartWidget = ({ itemNumber }) => {
   };
 
   return (
-    <Tooltip title={"Carrito"}>
+    <Tooltip title={"Shopping cart"}>
       <IconButton
         aria-label="notifications"
         aria-controls="menu-appbar"
@@ -32,7 +32,7 @@ export const CartWidget = ({ itemNumber }) => {
           badgeContent={itemNumber}
           color="secondary"
         >
-          <ShoppingCartIcon fontSize="large" style={{ color: "white" }} />
+          <ShoppingCartIcon fontSize="medium" style={{ color: "white" }} />
         </Badge>
       </IconButton>
     </Tooltip>

@@ -8,6 +8,8 @@ import { ItemDetail } from "../../molecules/ItemDetail/ItemDetail";
 import { collection, where, getDocs, query } from "firebase/firestore";
 import { NotFound } from "../../organism/NotFound/NotFound";
 import { ContentPages } from "../../atoms/ContentPages/ContentPages";
+import { useAuth } from "../../../../context/AuthContext";
+import Swal from "sweetalert2";
 
 export const ItemDetailContainer = () => {
   const [product, setProduct] = useState([]);
@@ -15,6 +17,7 @@ export const ItemDetailContainer = () => {
   const [added, setAdded] = useState(false);
   const { id } = useParams();
   const { addToCart } = useContext(CartContext);
+  const { currentUser } = useAuth();
 
   useEffect(() => {
     setLoading(true);
@@ -35,14 +38,32 @@ export const ItemDetailContainer = () => {
         setLoading(false);
       })
       .catch((error) => {
-        console.log(error);
+        Swal.fire({
+          position: "center",
+          icon: "error",
+          title: "Something went wrong!",
+          text: `${error.message}`,
+          showConfirmButton: true,
+          confirmButtonColor: "#722f37",
+        });
         setLoading(false);
       });
   }, [id]);
 
   const onAdd = (count) => {
-    addToCart(product, count);
-    setAdded(true);
+    if (currentUser) {
+      addToCart(product, count);
+      setAdded(true);
+    } else {
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Something went wrong!",
+        text: "To buy, log in to your account",
+        showConfirmButton: true,
+        confirmButtonColor: "#722f37",
+      });
+    }
   };
 
   return (

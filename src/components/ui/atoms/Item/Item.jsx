@@ -34,7 +34,7 @@ const ButtonCustom = withStyles((theme) => ({
     },
     "&.MuiButton-root:hover": {
       backgroundColor: alpha("#722f37", 0.8),
-      color:"white",
+      color: "white",
     },
   },
 }))(Button);
@@ -47,12 +47,20 @@ export const Item = ({ id, stock, titleItem, category, urlImg }) => {
     <>
       <CardCustom>
         <CardHeader
+          sx={{
+            display: "flex",
+            overflow: "hidden",
+            "& .MuiCardHeader-content": {
+              overflow: "hidden",
+            },
+          }}
           titleTypographyProps={{
             variant: "subtitle1",
             fontWeight: "600",
             color: "#722f37",
+            noWrap: true
           }}
-          title={titleCustom2.substring(0, 20) + "..."}
+          title={titleCustom2}
           subheader={
             category.charAt(0).toUpperCase() +
             category.slice(1) +
@@ -61,6 +69,7 @@ export const Item = ({ id, stock, titleItem, category, urlImg }) => {
           }
           subheaderTypographyProps={{
             variant: "body2",
+            noWrap: true
           }}
           action={
             <IconButton aria-label="add to favorites">

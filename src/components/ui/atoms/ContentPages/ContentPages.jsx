@@ -4,7 +4,7 @@ import React from "react";
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    // height: "auto",
+    minHeight: "90vh",
 
     paddingTop: theme.spacing(4),
     paddingBottom: theme.spacing(3),

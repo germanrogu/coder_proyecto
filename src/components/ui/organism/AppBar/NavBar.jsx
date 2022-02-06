@@ -1,5 +1,13 @@
 import React, { useContext } from "react";
-import { AppBar, CssBaseline, Grid, Toolbar, Typography } from "@mui/material";
+import {
+  AppBar,
+  CssBaseline,
+  Grid,
+  IconButton,
+  Toolbar,
+  Tooltip,
+  Typography,
+} from "@mui/material";
 
 import { NavLogo } from "../../atoms/NavLogo/NavLogo";
 import logo from "../../../../img/comercio-electronico.png";
@@ -8,8 +16,10 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { MenuOption } from "../../molecules/MenuOption/MenuOption";
 import { makeStyles } from "@mui/styles";
 import { CartWidget } from "../../atoms/CartWidget/CartWidget";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { CartContext } from "../../../../context/CartContext";
+import LogoutIcon from "@mui/icons-material/Logout";
+import { useAuth } from "../../../../context/AuthContext";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -51,15 +61,18 @@ const useStyles = makeStyles((theme) => ({
 
 export const NavBar = () => {
   const classes = useStyles();
-  const { cartCounter } = useContext(CartContext);
+  const navigate = useNavigate();
+  const { cartCounter, clearCart } = useContext(CartContext);
+  const { currentUser, logOut } = useAuth();
 
-  const pages = [
-    "Electronics",
-    "Jewelery",
-    "Men's clothing",
-    "Women's clothing",
-  ];
-  const settings = ["orders", "Log Out"];
+  const onClickLogOut = () => {
+    logOut();
+    clearCart();
+    navigate("/auth/login");
+  };
+
+  const pages = ["Still wines", "Sparkling wines", "White wine", "Rosé wine"];
+  const settings = ["orders"];
 
   return (
     <>
@@ -101,7 +114,7 @@ export const NavBar = () => {
             >
               {pages.map((page) => (
                 <Link
-                  to={`/categoria/${page}`}
+                  to={`/category/${page}`}
                   style={{ display: "flex", textDecoration: "none" }}
                   key={page}
                 >
@@ -121,20 +134,71 @@ export const NavBar = () => {
             <Grid
               item
               xs={5}
-              sx={{ flexGrow: 0, display: "flex", justifyContent: "flex-end" }}
+              sx={{
+                flexGrow: 1,
+                display: { xs: "flex", md: "flex" },
+                justifyContent: "center",
+                alignItems: "center",
+              }}
             >
-              <Link
-                to={`/cart`}
-                style={{ display: "flex", textDecoration: "none" }}
-              >
-                <CartWidget itemNumber={cartCounter()} />
-              </Link>
-              <MenuOption
-                menuButton={"account"}
-                icon={<AccountCircleIcon fontSize="large" />}
-                tooltip={"Account"}
-                items={settings}
-              />
+              {!currentUser && (
+                <Link
+                  to={`/auth/login`}
+                  style={{ display: "flex", textDecoration: "none" }}
+                >
+                  <Typography
+                    sx={{
+                      textDecoration: "none",
+                      color: "white",
+                      paddingRight: "1.3rem",
+                    }}
+                  >
+                    Log In
+                  </Typography>
+                </Link>
+              )}
+
+              {!currentUser && (
+                <Link
+                  to={`/auth/register`}
+                  style={{ display: "flex", textDecoration: "none" }}
+                >
+                  <Typography
+                    sx={{
+                      textDecoration: "none",
+                      color: "white",
+                      paddingRight: "1.3rem",
+                    }}
+                  >
+                    Register
+                  </Typography>
+                </Link>
+              )}
+
+              {currentUser && (
+                <>
+                  <Link
+                    to={`/cart`}
+                    style={{ display: "flex", textDecoration: "none" }}
+                  >
+                    <CartWidget itemNumber={cartCounter()} />
+                  </Link>
+                  <MenuOption
+                    menuButton={"account"}
+                    icon={<AccountCircleIcon fontSize="medium" />}
+                    tooltip={"Orders"}
+                    items={settings}
+                  />
+                  <Tooltip title={"Log out"}>
+                    <IconButton onClick={onClickLogOut} aria-label="Log out">
+                      <LogoutIcon
+                        fontSize="medium"
+                        style={{ color: "white" }}
+                      />
+                    </IconButton>
+                  </Tooltip>
+                </>
+              )}
             </Grid>
           </Grid>
         </Toolbar>

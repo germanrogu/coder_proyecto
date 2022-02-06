@@ -1,24 +1,7 @@
 import React from "react";
 import Typography from "@mui/material/Typography";
-import { withStyles } from "@mui/styles";
-import { Button, Grid } from "@mui/material";
-
-const ButtonCustom = withStyles((theme) => ({
-  root: {
-    "&.MuiButton-root": {
-      textTransform: "none",
-      color: "white",
-      fontSize: "1rem",
-      fontWeight: "500",
-      padding: theme.spacing(1),
-      borderRadius: "10px",
-      backgroundColor: "red",
-    },
-    "&.MuiButton-root:hover": {
-      backgroundColor: "red",
-    },
-  },
-}))(Button);
+import { Grid, IconButton } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 export const CartItem = ({
   product: {
@@ -33,21 +16,34 @@ export const CartItem = ({
       spacing={3}
       sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
     >
-      <Grid item xs={1} md={1}>
-        <img height={65} src={image} alt={title} />
+      <Grid item xs={3} md={1}>
+        <img height={50} src={image} alt={title} />
       </Grid>
-      <Grid item xs={3} md={3}>
+      <Grid
+        item
+        xs={9}
+        md={4}
+        sx={{ display: "flex", justifyContent: "flex-start" }}
+      >
         <Typography
           style={{
             fontWeight: "600",
             color: "#722f37",
+            display: "flex",
+            overflow: "hidden",
+            noWrap: true,
           }}
           variant="subtitle1"
         >
-          {title}
+          {title.substring(0, 35) + "..."}
         </Typography>
       </Grid>
-      <Grid item xs={3} md={1}>
+      <Grid
+        item
+        xs={5}
+        md={1}
+        sx={{ display: "flex", justifyContent: "center" }}
+      >
         <Typography
           style={{
             fontWeight: "600",
@@ -57,7 +53,12 @@ export const CartItem = ({
           {"$" + price}
         </Typography>
       </Grid>
-      <Grid item xs={3} md={1}>
+      <Grid
+        item
+        xs={5}
+        md={1}
+        sx={{ display: "flex", justifyContent: "center" }}
+      >
         <Typography
           style={{
             fontWeight: "600",
@@ -67,8 +68,19 @@ export const CartItem = ({
           {quantity}
         </Typography>
       </Grid>
-      <Grid item xs={3} md={3}>
-        <ButtonCustom onClick={() => deleteItem(id)}>Delete</ButtonCustom>
+      <Grid
+        item
+        xs={2}
+        md={1}
+        sx={{ display: "flex", justifyContent: "center" }}
+      >
+        <IconButton
+          onClick={() => deleteItem(id)}
+          aria-label="delete"
+          style={{ color: "#722f37" }}
+        >
+          <DeleteIcon />
+        </IconButton>
       </Grid>
     </Grid>
   );

@@ -1,10 +1,13 @@
 import React, { useContext } from "react";
 import { CartContext } from "../../../context/CartContext";
-import { Button, Divider, Grid, Typography } from "@mui/material";
+import { alpha, Button, Divider, Grid, Typography } from "@mui/material";
 import { CartItem } from "../../ui/atoms/CartItem/CartItem";
 import { Link } from "react-router-dom";
 import { makeStyles, withStyles } from "@mui/styles";
 import { ContentPages } from "../../ui/atoms/ContentPages/ContentPages";
+import RemoveShoppingCartIcon from "@mui/icons-material/RemoveShoppingCart";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -21,16 +24,17 @@ const ButtonCustom = withStyles((theme) => ({
   root: {
     "&.MuiButton-root": {
       textTransform: "none",
-      // color: "#3483fa",
+      color: "#722f37",
       fontSize: "1rem",
       fontWeight: "600",
       padding: theme.spacing(1),
       borderRadius: "8px",
-      // backgroundColor: "#4189e626",
+      backgroundColor: alpha("#722f37", 0.2),
       margin: theme.spacing(2),
     },
     "&.MuiButton-root:hover": {
-      backgroundColor: "#4189e659",
+      backgroundColor: alpha("#722f37", 0.8),
+      color: "white",
     },
   },
 }))(Button);
@@ -51,7 +55,7 @@ export const Cart = () => {
           fontWeight: "600",
           color: "#722f37",
           paddingTop: "1.3rem",
-          paddingBottom: "1.5rem",
+          paddingBottom: "1.8rem",
           fontFamily: "Marck Script",
         }}
       >
@@ -73,7 +77,15 @@ export const Cart = () => {
               </Grid>
             ))}
             <Grid item xs={12} md={6}>
-              <Typography variant="h5">{`Total : $ ${totalPrice()}`}</Typography>
+              <Typography
+                style={{
+                  fontSize: "1.5rem",
+                  fontWeight: "600",
+                  color: "#722f37",
+                  margin: "1.3rem",
+                }}
+                variant="h5"
+              >{`Total : $${totalPrice()}`}</Typography>
             </Grid>
           </Grid>
 
@@ -96,10 +108,32 @@ export const Cart = () => {
                   alignItems: "center",
                 }}
               >
-                <ButtonCustom variant="contained" color="secondary">
+                <ButtonCustom
+                  startIcon={<ArrowBackIcon />}
+                  variant="contained"
+                  color="secondary"
+                >
                   Keep shopping
                 </ButtonCustom>
               </Link>
+            </Grid>
+            <Grid
+              item
+              xs={12}
+              md={4}
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+              }}
+            >
+              <ButtonCustom
+                startIcon={<RemoveShoppingCartIcon />}
+                variant="contained"
+                onClick={() => clearCart()}
+                color="error"
+              >
+                Empty cart
+              </ButtonCustom>
             </Grid>
             <Grid
               item
@@ -119,27 +153,14 @@ export const Cart = () => {
                   alignItems: "center",
                 }}
               >
-                <ButtonCustom variant="contained" color="success">
-                  Place an order
+                <ButtonCustom
+                  endIcon={<ArrowForwardIcon />}
+                  variant="contained"
+                  color="success"
+                >
+                  Checkout
                 </ButtonCustom>
               </Link>
-            </Grid>
-            <Grid
-              item
-              xs={12}
-              md={4}
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-              }}
-            >
-              <ButtonCustom
-                variant="contained"
-                onClick={() => clearCart()}
-                color="error"
-              >
-                Empty cart
-              </ButtonCustom>
             </Grid>
           </Grid>
         </>
@@ -149,6 +170,9 @@ export const Cart = () => {
             style={{
               display: "flex",
               justifyContent: "center",
+              marginTop: "2rem",
+              marginBottom: "2rem",
+              fontSize: "1.2rem",
             }}
           >
             No items in the cart

@@ -5,6 +5,7 @@ import { ThemeProvider } from '@mui/styles'
 import { AppRouter } from './routes/AppRouter';
 import { CartProvider } from './context/CartContext';
 import { createTheme } from '@mui/material/styles';
+import { AuthContextProvider } from './context/AuthContext';
 
 export const theme = createTheme({
 
@@ -52,11 +53,14 @@ export const theme = createTheme({
 
 export const App = () => {
     return (
-        <CartProvider>
-            <ThemeProvider theme={theme}>
-                <AppRouter />
-            </ThemeProvider>
-        </CartProvider>
+        <AuthContextProvider>
+            <CartProvider>
+                <ThemeProvider theme={theme}>
+                    <AppRouter />
+                </ThemeProvider>
+            </CartProvider>
+        </AuthContextProvider>
+
 
     )
 }
